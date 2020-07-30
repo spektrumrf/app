@@ -16,6 +16,16 @@ export default {
               TabTwoScreen: 'two',
             },
           },
+          Spektraklet: {
+            screens: {
+              SpektrakletScreen: 'spektraklet',
+              Post: {
+                screens: {
+                  PostScreen: 'post',
+                },
+              },
+            },
+          },
         },
       },
       NotFound: '*',

@@ -7,7 +7,9 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import SpektrakletScreen from '../screens/SpektrakletScreen';
+import PostScreen from '../screens/PostScreen';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, SpektrakletParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -30,6 +32,13 @@ export default function BottomTabNavigator() {
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Spektraklet"
+        component={SpektrakletNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-book" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -69,5 +78,24 @@ function TabTwoNavigator() {
         options={{ headerTitle: 'Tab Two Title' }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const SpektrakletStack = createStackNavigator<SpektrakletParamList>();
+
+function SpektrakletNavigator() {
+  return (
+    <SpektrakletStack.Navigator>
+      <SpektrakletStack.Screen
+        name="SpektrakletScreen"
+        component={SpektrakletScreen}
+        options={{ headerTitle: 'Spektraklet' }}
+      />
+      <SpektrakletStack.Screen
+        name="Post"
+        component={PostScreen}
+        options={{ headerTitle: 'Post' }}
+      />
+    </SpektrakletStack.Navigator>
   );
 }
