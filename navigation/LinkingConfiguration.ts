@@ -1,34 +1,34 @@
-import * as Linking from 'expo-linking';
+import * as Linking from 'expo-linking'
 
 export default {
-  prefixes: [Linking.makeUrl('/')],
-  config: {
-    screens: {
-      Root: {
+    prefixes: [Linking.makeUrl('/')],
+    config: {
         screens: {
-          TabOne: {
-            screens: {
-              TabOneScreen: 'one',
-            },
-          },
-          TabTwo: {
-            screens: {
-              TabTwoScreen: 'two',
-            },
-          },
-          Spektraklet: {
-            screens: {
-              SpektrakletScreen: 'spektraklet',
-              Post: {
+            Root: {
                 screens: {
-                  PostScreen: 'post',
-                },
-              },
+                    TabOne: {
+                        screens: {
+                            TabOneScreen: 'one'
+                        }
+                    },
+                    TabTwo: {
+                        screens: {
+                            TabTwoScreen: 'two'
+                        }
+                    },
+                    Spektraklet: {
+                        screens: {
+                            SpektrakletScreen: 'spektraklet',
+                            Post: {
+                                screens: {
+                                    PostScreen: 'post'
+                                }
+                            }
+                        }
+                    }
+                }
             },
-          },
-        },
-      },
-      NotFound: '*',
-    },
-  },
-};
+            NotFound: '*'
+        }
+    }
+}
