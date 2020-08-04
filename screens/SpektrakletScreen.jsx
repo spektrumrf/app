@@ -7,7 +7,7 @@ import { Card } from 'react-native-elements'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import LoadingScreen from './LoadingScreen'
-import { View } from '../components/Themed'
+import { SafeAreaView } from '../components/Themed'
 import { fetchSpektrakletData } from '../hooks/useSpektrakletApi'
 
 export default function SpektrakletSceen ({ navigation }) {
@@ -79,7 +79,7 @@ export default function SpektrakletSceen ({ navigation }) {
             String.fromCharCode(charCode))
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {posts.length > 0 ? (
                 <FlatList
                     refreshControl={<RefreshControl
@@ -107,7 +107,7 @@ export default function SpektrakletSceen ({ navigation }) {
                                 navigation.navigate('Root', {
                                     screen: 'Spektraklet',
                                     params: {
-                                        screen: 'Post',
+                                        screen: 'PostScreen',
                                         params: {
                                             id: item.id
                                         }
@@ -126,7 +126,7 @@ export default function SpektrakletSceen ({ navigation }) {
             ) : (
                 <LoadingScreen/>
             )}
-        </View>
+        </SafeAreaView>
     )
 }
 

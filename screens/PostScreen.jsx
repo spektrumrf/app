@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Dimensions, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import HTML from 'react-native-render-html'
 import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils'
 
+import Layout from '../constants/Layout'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import LoadingScreen from './LoadingScreen'
@@ -56,7 +57,7 @@ export default function PostScreen ({ route }) {
                         html={post.content.rendered}
                         baseFontStyle={{ fontSize: 18 }}
                         tagsStyles={tagsStyles}
-                        imagesMaxWidth={Dimensions.get('window').width - 30}
+                        imagesMaxWidth={Layout.window.width - 30}
                         ignoredStyles={['width', 'height', 'video']}
                         onLinkPress={(evt, href) => WebBrowser.openBrowserAsync(href)}
                         alterNode = { (node) => {
