@@ -16,7 +16,7 @@ const DISCORD_URL = 'https://discord.gg/JKyBHeA'
 const SPOTIFY_URL = 'https://open.spotify.com/playlist/7wkSGEKhkyGztLINK37vlv?si=ulKr4CsTQISATz8x4JK1Zg'
 const INSTAGRAM_URL = 'https://instagram.com/spektrumrf'
 
-export default function TabOneScreen ({ navigation }) {
+export default function HomeScreen ({ navigation }) {
     const { mode, theme } = useTheme()
 
     const [visitHomepage, setVisitHomepage] = useState(false)

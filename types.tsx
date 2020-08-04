@@ -7,6 +7,7 @@ export type BottomTabParamList = {
   Home: undefined;
   TabTwo: undefined;
   Spektraklet: undefined;
+  Activities: undefined;
 };
 
 export type HomeParamList = {
@@ -21,4 +22,8 @@ export type TabTwoParamList = {
 export type SpektrakletParamList = {
   SpektrakletScreen: undefined;
   PostScreen: undefined;
+};
+
+export type ActivitiesParamList = {
+  ActivitiesScreen: undefined;
 };
