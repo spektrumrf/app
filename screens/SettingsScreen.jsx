@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Switch } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 
 import { useTheme } from '../hooks/useTheme'
-import Layout from '../constants/Layout'
-import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
 import { View, Text } from '../components/Themed'
 
 const REPOSITORY_URL = 'https://github.com/spektrumrf/app'
 
-export default function SettingsScreen ({ route }) {
+export default function SettingsScreen () {
     const { mode, theme, toggle } = useTheme()
-    const colorScheme = useColorScheme()
 
     const [light, setLight] = useState(mode === 'light')
     const [dark, setDark] = useState(mode === 'dark')

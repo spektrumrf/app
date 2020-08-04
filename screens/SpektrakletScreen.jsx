@@ -4,13 +4,14 @@ import { StyleSheet, TouchableOpacity, FlatList, RefreshControl } from 'react-na
 import HTML from 'react-native-render-html'
 import { Card } from 'react-native-elements'
 
-import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
 import LoadingScreen from './LoadingScreen'
+import { useTheme } from '../hooks/useTheme'
 import { SafeAreaView } from '../components/Themed'
 import { fetchSpektrakletData } from '../hooks/useSpektrakletApi'
 
 export default function SpektrakletSceen ({ navigation }) {
+    const { theme } = useTheme()
+
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true)
@@ -58,11 +59,12 @@ export default function SpektrakletSceen ({ navigation }) {
         return () => isMountedRef.current = false
     }
 
-    const colorScheme = useColorScheme()
-
     const tagsStyles = {
         a: {
-            color: Colors[colorScheme].tint
+            color: theme.primary
+        },
+        p: {
+            color: theme.text
         }
     }
 
@@ -83,7 +85,8 @@ export default function SpektrakletSceen ({ navigation }) {
             {posts.length > 0 ? (
                 <FlatList
                     refreshControl={<RefreshControl
-                        colors={[Colors[colorScheme].tint]}
+                        colors={[theme.primary]}
+                        tintColor={theme.primary}
                         refreshing={refreshing}
                         onRefresh={() => onRefresh()} />
                     }
@@ -98,8 +101,9 @@ export default function SpektrakletSceen ({ navigation }) {
                     renderItem={({ item }) => (
                         <Card
                             title={decodeHtmlCharCodes(item.title.rendered)}
+                            containerStyle={{ borderRadius: 10, backgroundColor: theme.background }}
                             titleStyle={{
-                                color: Colors[colorScheme].text
+                                color: theme.text
                             }}
                             image={getImage(item)}
                         >

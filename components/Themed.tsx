@@ -5,7 +5,7 @@ import { SafeAreaView as DefaultSafeAreaView } from 'react-native-safe-area-cont
 import { useTheme } from '../hooks/useTheme'
 
 export function useThemeColor (colorName : string) {
-    const { mode, theme, toggle } = useTheme()
+    const { theme } = useTheme()
     return theme[colorName]
 }
 
@@ -18,21 +18,21 @@ export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
 
 export function Text (props: TextProps) {
-    const { style, lightColor, darkColor, ...otherProps } = props
+    const { style, ...otherProps } = props
     const color = useThemeColor('text')
 
     return <DefaultText style={[{ color }, style]} {...otherProps} />
 }
 
 export function View (props: ViewProps) {
-    const { style, lightColor, darkColor, ...otherProps } = props
+    const { style, ...otherProps } = props
     const backgroundColor = useThemeColor('background')
 
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />
 }
 
 export function SafeAreaView (props: ViewProps) {
-    const { style, lightColor, darkColor, ...otherProps } = props
+    const { style, ...otherProps } = props
     const backgroundColor = useThemeColor('background')
 
     return <DefaultSafeAreaView style={[{ backgroundColor }, style]} {...otherProps} />

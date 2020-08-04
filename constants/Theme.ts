@@ -1,6 +1,6 @@
-const tintColorPrimary = '#FF60A5'
-const tintColorSecondary = '#FFCEE5'
-const idlePrimary = '#f4f3f4'
+const primary = '#FF60A5'
+const secondary = 'pink'
+const idlePrimary = 'lightgray'
 const idleSecondary = 'gray'
 
 export const ThemeColors = {
@@ -13,12 +13,12 @@ export const ThemeColors = {
         dark: 'black'
     },
     primary: {
-        light: tintColorPrimary,
-        dark: tintColorPrimary
+        light: primary,
+        dark: primary
     },
     secondary: {
-        light: tintColorSecondary,
-        dark: tintColorSecondary
+        light: secondary,
+        dark: secondary
     },
     idle: {
         light: idlePrimary,
@@ -29,8 +29,8 @@ export const ThemeColors = {
         dark: idleSecondary
     },
     tabIconSelected: {
-        light: tintColorPrimary,
-        dark: tintColorPrimary
+        light: primary,
+        dark: primary
     },
     iconSize: {
         light: 34,

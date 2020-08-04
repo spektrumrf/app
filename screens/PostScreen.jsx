@@ -4,15 +4,16 @@ import * as WebBrowser from 'expo-web-browser'
 import HTML from 'react-native-render-html'
 import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils'
 
-import Layout from '../constants/Layout'
-import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
 import LoadingScreen from './LoadingScreen'
+import { useTheme } from '../hooks/useTheme'
+import Layout from '../constants/Layout'
 import { View } from '../components/Themed'
 import { fetchSpektrakletData } from '../hooks/useSpektrakletApi'
 
 export default function PostScreen ({ route }) {
     const { id } = route.params
+
+    const { theme } = useTheme()
 
     const [post, setPost] = useState()
     const [loading, setLoading] = useState(true)
@@ -29,11 +30,9 @@ export default function PostScreen ({ route }) {
         return () => mounted = false
     })
 
-    const colorScheme = useColorScheme()
-
     const tagsStyles = {
         a: {
-            color: Colors[colorScheme].tint
+            color: theme.primary
         },
         img: {
             paddingTop: 10
@@ -43,6 +42,7 @@ export default function PostScreen ({ route }) {
             paddingBottom: 15
         },
         figcaption: {
+            color: theme.text,
             fontSize: 14
         }
     }
@@ -51,11 +51,15 @@ export default function PostScreen ({ route }) {
         <View style={styles.container}>
             {!loading ? (
                 <ScrollView>
-                    <HTML html={`<h1>${post.title.rendered}</h1>`}/>
+                    <HTML
+                        tagsStyles={tagsStyles}
+                        html={post.title.rendered}
+                        baseFontStyle={{ fontSize: 25, fontWeight: 'bold', color: theme.text }}
+                    />
                     <HTML
                         style={{ alignSelf: 'center' }}
                         html={post.content.rendered}
-                        baseFontStyle={{ fontSize: 18 }}
+                        baseFontStyle={{ fontSize: 18, color: theme.text }}
                         tagsStyles={tagsStyles}
                         imagesMaxWidth={Layout.window.width - 30}
                         ignoredStyles={['width', 'height', 'video']}
@@ -82,6 +86,7 @@ export default function PostScreen ({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 15,
         paddingLeft: 15,
         paddingRight: 15
     }

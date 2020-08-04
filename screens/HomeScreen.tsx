@@ -17,7 +17,7 @@ const SPOTIFY_URL = 'https://open.spotify.com/playlist/7wkSGEKhkyGztLINK37vlv?si
 const INSTAGRAM_URL = 'https://instagram.com/spektrumrf'
 
 export default function TabOneScreen ({ navigation }) {
-    const { mode, theme, toggle } = useTheme()
+    const { mode, theme } = useTheme()
 
     const [visitHomepage, setVisitHomepage] = useState(false)
     const [visitSettings, setVisitSettings] = useState(false)
@@ -71,7 +71,7 @@ export default function TabOneScreen ({ navigation }) {
                     style={styles.logo}
                     source={logos.pink}>
                     <Image
-                        style={{ zIndex: 1, position: 'absolute', ...styles.logo}}
+                        style={{ zIndex: 1, position: 'absolute', ...styles.logo }}
                         source={visitHomepage ? null : logos[mode]}
                     />
                 </ImageBackground>

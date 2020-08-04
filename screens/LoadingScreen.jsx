@@ -1,18 +1,18 @@
 import React from 'react'
 import { StyleSheet, ScrollView, RefreshControl } from 'react-native'
 
-import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
+import { useTheme } from '../hooks/useTheme'
 import { View } from '../components/Themed'
 
 export default function LoadingScreen () {
-    const colorScheme = useColorScheme()
+    const { theme } = useTheme()
     return (
         <View style={styles.container}>
             <ScrollView
                 refreshControl={
                     <RefreshControl
-                        colors={[Colors[colorScheme].tint]}
+                        colors={[theme.primary]}
+                        tintColor={theme.primary}
                         refreshing={true}
                     />
                 }

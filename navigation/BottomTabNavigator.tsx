@@ -1,12 +1,9 @@
-import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Icon } from 'react-native-elements'
 import * as React from 'react'
 
 import { useTheme } from '../hooks/useTheme'
-import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
 import HomeScreen from '../screens/HomeScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import TabTwoScreen from '../screens/TabTwoScreen'
@@ -17,8 +14,7 @@ import { BottomTabParamList, HomeParamList, TabTwoParamList, SpektrakletParamLis
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
 export default function BottomTabNavigator () {
-    const colorScheme = useColorScheme()
-    const { mode, theme, toggle } = useTheme()
+    const { theme } = useTheme()
     return (
         <BottomTab.Navigator
             initialRouteName='Home'
