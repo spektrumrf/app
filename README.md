@@ -15,6 +15,12 @@ npm install -g expo-cli
 expo start
 ```
 
+## Optimize assets
+
+```
+npx expo-optimize
+```
+
 ## New packaged
 
 ```
