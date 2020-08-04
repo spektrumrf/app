@@ -4,9 +4,9 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, TouchableHighlight, Image, ImageBackground } from 'react-native'
 import { Icon } from 'react-native-elements'
 
-import { useTheme } from '../hooks/useTheme'
-import Layout from '../constants/Layout'
-import { Text, View, SafeAreaView } from '../components/Themed'
+import { useTheme } from '../../hooks/useTheme'
+import Layout from '../../constants/Layout'
+import { Text, View, SafeAreaView } from '../../components/Themed'
 
 const HOMEPAGE_URL = 'https://spektrum.fi'
 const WHATSAPP_URL = 'https://chat.whatsapp.com/Ku08Q8x7voJ6VojRexYT0F'
@@ -29,9 +29,9 @@ export default function HomeScreen ({ navigation }) {
     const [visitSpotify, setVisitSpotify] = useState(false)
 
     const logos = {
-        light: require('../assets/images/logo-black.png'),
-        dark: require('../assets/images/logo-white.png'),
-        pink: require('../assets/images/logo-pink.png')
+        light: require('../../assets/images/logo-black.png'),
+        dark: require('../../assets/images/logo-white.png'),
+        pink: require('../../assets/images/logo-pink.png')
     }
     return (
         <SafeAreaView style={styles.container}>

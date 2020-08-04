@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import { StyleSheet, Switch } from 'react-native'
+import { StyleSheet, Switch, TouchableHighlight } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 
-import { useTheme } from '../hooks/useTheme'
-import { View, Text } from '../components/Themed'
+import { useTheme } from '../../hooks/useTheme'
+import { View, Text } from '../../components/Themed'
 
 const REPOSITORY_URL = 'https://github.com/spektrumrf/app'
 
 export default function SettingsScreen () {
     const { mode, theme, toggle } = useTheme()
 
+    const [underline, setUnderline] = useState('underline')
     const [light, setLight] = useState(mode === 'light')
     const [dark, setDark] = useState(mode === 'dark')
     const toggleTheme = () => {
@@ -47,12 +48,19 @@ export default function SettingsScreen () {
             <Text style={styles.title}>
                 Om
             </Text>
-            <Text
-                style={{ color: theme.primary }}
+            <TouchableHighlight
+                activeOpacity={1}
+                underlayColor={theme.background}
+                onShowUnderlay={() => setUnderline(null)}
+                onHideUnderlay={() => setUnderline('underline')}
                 onPress={() => { WebBrowser.openBrowserAsync(REPOSITORY_URL) }}
             >
-                https://github.com/spektrumrf/app
-            </Text>
+                <Text
+                    style={{ color: theme.primary, textDecorationLine: underline }}
+                >
+                    {REPOSITORY_URL}
+                </Text>
+            </TouchableHighlight>
             <Text>
                 © Daniel Holmberg, 2020
             </Text>

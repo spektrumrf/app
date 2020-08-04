@@ -5,7 +5,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Home: undefined;
-  TabTwo: undefined;
+  Lunch: undefined;
   Spektraklet: undefined;
   Activities: undefined;
 };
@@ -15,8 +15,8 @@ export type HomeParamList = {
   SettingsScreen: undefined;
 };
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+export type LunchParamList = {
+  LunchScreen: undefined;
 };
 
 export type SpektrakletParamList = {
@@ -26,4 +26,7 @@ export type SpektrakletParamList = {
 
 export type ActivitiesParamList = {
   ActivitiesScreen: undefined;
+  SongBookScreen: undefined;
+  SongArchiveScreen: undefined;
+  CalendarScreen: undefined;
 };

@@ -5,15 +5,15 @@ import HTML from 'react-native-render-html'
 import { Icon } from 'react-native-elements'
 import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils'
 
-import LoadingScreen from './LoadingScreen'
-import { useTheme } from '../hooks/useTheme'
-import Layout from '../constants/Layout'
-import { View } from '../components/Themed'
-import { fetchSpektrakletData } from '../hooks/useSpektrakletApi'
+import LoadingScreen from '../LoadingScreen'
+import { useTheme } from '../../hooks/useTheme'
+import Layout from '../../constants/Layout'
+import { View } from '../../components/Themed'
+import { fetchSpektrakletData } from '../../hooks/useSpektrakletApi'
 
 const onShare = async (title, url) => {
     Share.share({
-      message: `${title}\n#spektraklet\n\n${url}`,
+        message: `${title}\n#spektraklet\n\n${url}`
     })
 }
 
@@ -71,8 +71,8 @@ export default function PostScreen ({ route }) {
                         onPress={() =>
                             onShare(post.title.rendered, post.link)
                         }>
-                        <Icon 
-                            color={share? theme.primary : theme.text}
+                        <Icon
+                            color={share ? theme.primary : theme.text}
                             name='share'
                             type='fontisto'
                             size={27}

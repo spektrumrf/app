@@ -4,10 +4,10 @@ import { StyleSheet, TouchableOpacity, FlatList, RefreshControl } from 'react-na
 import HTML from 'react-native-render-html'
 import { Card } from 'react-native-elements'
 
-import LoadingScreen from './LoadingScreen'
-import { useTheme } from '../hooks/useTheme'
-import { SafeAreaView } from '../components/Themed'
-import { fetchSpektrakletData } from '../hooks/useSpektrakletApi'
+import LoadingScreen from '../LoadingScreen'
+import { useTheme } from '../../hooks/useTheme'
+import { SafeAreaView } from '../../components/Themed'
+import { fetchSpektrakletData } from '../../hooks/useSpektrakletApi'
 
 export default function SpektrakletSceen ({ navigation }) {
     const { theme } = useTheme()
@@ -107,17 +107,19 @@ export default function SpektrakletSceen ({ navigation }) {
                             }}
                             image={getImage(item)}
                         >
-                            <TouchableOpacity onPress={() => {
-                                navigation.navigate('Root', {
-                                    screen: 'Spektraklet',
-                                    params: {
-                                        screen: 'PostScreen',
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.navigate('Root', {
+                                        screen: 'Spektraklet',
                                         params: {
-                                            id: item.id
+                                            screen: 'PostScreen',
+                                            params: {
+                                                id: item.id
+                                            }
                                         }
-                                    }
-                                })
-                            }}>
+                                    })
+                                }}
+                            >
                                 <HTML
                                     html={item.excerpt.rendered}
                                     tagsStyles={tagsStyles}
