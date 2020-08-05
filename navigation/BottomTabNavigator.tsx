@@ -22,7 +22,7 @@ function BottomTabNavigator ({ theme }) {
     return (
         <BottomTab.Navigator
             initialRouteName='Home'
-            tabBarOptions={{ activeTintColor: theme.primary, inactiveTintColor: 'gray', showLabel: false }}>
+            tabBarOptions={{ activeTintColor: theme.primary, inactiveTintColor: theme.idle, showLabel: false }}>
             <BottomTab.Screen
                 name='Home'
                 component={HomeNavigator}

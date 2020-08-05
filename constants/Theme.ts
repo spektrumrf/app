@@ -2,7 +2,7 @@ const primary = '#FF60A5'
 const secondary = 'pink'
 
 export const ThemeColors = {
-    key: {
+    id: {
         light: 'light',
         dark: 'dark'
     },
@@ -38,14 +38,6 @@ export const ThemeColors = {
         light: 15,
         dark: 15
     }
-}
-
-export const getTheme = (mode: string) => {
-    const Theme = {}
-    for (const key in ThemeColors) {
-        Theme[key] = ThemeColors[key][mode]
-    }
-    return Theme
 }
 
 export const DarkTheme = {

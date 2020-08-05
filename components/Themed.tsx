@@ -2,8 +2,7 @@ import * as React from 'react'
 import { Text as DefaultText, View as DefaultView } from 'react-native'
 import { SafeAreaView as DefaultSafeAreaView } from 'react-native-safe-area-context'
 
-import { getTheme } from '../constants/Theme'
-import { getThemeID } from '../hooks/useTheme'
+import { getThemeID, getTheme } from '../hooks/useTheme'
 
 export function useThemeColor (colorName : string) {
     const themeID = getThemeID()

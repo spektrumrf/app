@@ -34,7 +34,7 @@ function HomeScreen ({ navigation, theme }) {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar
-                style={theme.key === 'dark' ? 'light' : 'dark'}
+                style={theme.id === 'dark' ? 'light' : 'dark'}
             />
             <TouchableHighlight
                 activeOpacity={1}
@@ -70,7 +70,7 @@ function HomeScreen ({ navigation, theme }) {
                     source={logos.pink}>
                     <Image
                         style={{ zIndex: 1, position: 'absolute', ...styles.logo }}
-                        source={visitHomepage ? null : logos[theme.key]}
+                        source={visitHomepage ? null : logos[theme.id]}
                     />
                 </ImageBackground>
             </TouchableHighlight>

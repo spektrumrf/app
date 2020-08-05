@@ -3,14 +3,14 @@ import { StyleSheet, TouchableHighlight } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { RadioButton } from 'react-native-paper'
 
-import { withTheme } from '../../hooks/useTheme'
+import { withTheme, getThemeID } from '../../hooks/useTheme'
 import { View, Text } from '../../components/Themed'
 
 const REPOSITORY_URL = 'https://github.com/spektrumrf/app'
 
 function SettingsScreen ({ theme, setTheme }) {
     const [underline, setUnderline] = useState('underline')
-    const [checked, setChecked] = useState(theme.key)
+    const [checked, setChecked] = useState(getThemeID())
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
@@ -41,6 +41,21 @@ function SettingsScreen ({ theme, setTheme }) {
                     onPress={() => {
                         setTheme('dark')
                         setChecked('dark')
+                    }}
+                    color={theme.primary}
+                    uncheckedColor={theme.idle}
+                />
+            </View>
+            <View style={styles.toggle}>
+                <Text>
+                    Standard
+                </Text>
+                <RadioButton
+                    value='standard'
+                    status={ checked === 'standard' ? 'checked' : 'unchecked' }
+                    onPress={() => {
+                        setTheme('standard')
+                        setChecked('standard')
                     }}
                     color={theme.primary}
                     uncheckedColor={theme.idle}

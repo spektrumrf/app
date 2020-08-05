@@ -15,7 +15,7 @@ function Navigation ({ theme }) {
     return (
         <NavigationContainer
             linking={LinkingConfiguration}
-            theme={theme.key === 'dark' ? DarkTheme : DefaultTheme}>
+            theme={theme.id === 'dark' ? DarkTheme : DefaultTheme}>
             <RootNavigator />
         </NavigationContainer>
     )

@@ -2,10 +2,25 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Appearance } from 'react-native-appearance'
 
 import { retrieveData, storeData } from './useStorage'
-import { getTheme } from '../constants/Theme'
+import { ThemeColors } from '../constants/Theme'
 
 const STORAGE_KEY = 'THEME_ID'
 const ThemeContext = React.createContext()
+
+export const getTheme = (mode) => {
+    if (mode === 'standard') {
+        if (Appearance.getColorScheme()) {
+            mode = Appearance.getColorScheme()
+        } else {
+            mode = 'light'
+        }
+    }
+    const Theme = {}
+    for (const key in ThemeColors) {
+        Theme[key] = ThemeColors[key][mode]
+    }
+    return Theme
+}
 
 export const ThemeContextProvider = ({ children }) => {
     const [themeID, setThemeID] = useState()
@@ -16,7 +31,7 @@ export const ThemeContextProvider = ({ children }) => {
             if (storedThemeID) {
                 setThemeID(storedThemeID)
             } else if (Appearance.getColorScheme()) {
-                setThemeID(Appearance.getColorScheme())
+                setThemeID('standard')
             } else {
                 setThemeID('light')
             }
@@ -39,7 +54,6 @@ export function withTheme (Component) {
     return props => {
         const { themeID, setThemeID } = useContext(ThemeContext)
 
-        // const getTheme = themeID => THEMES.find(theme => theme.key === themeID);
         const setTheme = themeID => {
             storeData(STORAGE_KEY, themeID)
             setThemeID(themeID)
