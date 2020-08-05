@@ -11,7 +11,6 @@ import LunchScreen from '../screens/Lunch/LunchScreen'
 import SpektrakletScreen from '../screens/Spektraklet/SpektrakletScreen'
 import PostScreen from '../screens/Spektraklet/PostScreen'
 import ActivitiesScreen from '../screens/Activities/ActivitiesScreen'
-import SongBookScreen from '../screens/Activities/SongBookScreen'
 import SongArchiveScreen from '../screens/Activities/SongArchiveScreen'
 import CalendarScreen from '../screens/Activities/CalendarScreen'
 import { BottomTabParamList, HomeParamList, LunchParamList, SpektrakletParamList, ActivitiesParamList } from '../types'
@@ -122,11 +121,6 @@ function ActivitiesNavigator () {
                 name='ActivitiesScreen'
                 component={ActivitiesScreen}
                 options={{ headerShown: false }}
-            />
-            <ActivitiesStack.Screen
-                name='SongBookScreen'
-                component={SongBookScreen}
-                options={{ headerTitle: '' }}
             />
             <ActivitiesStack.Screen
                 name='SongArchiveScreen'

@@ -124,8 +124,7 @@ function SpektrakletSceen ({ navigation, theme }) {
                                 />
                             </TouchableOpacity>
                         </Card>
-                    )
-                    }
+                    )}
                 />
             ) : (
                 <LoadingScreen/>

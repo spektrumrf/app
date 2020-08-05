@@ -26,7 +26,6 @@ export type SpektrakletParamList = {
 
 export type ActivitiesParamList = {
   ActivitiesScreen: undefined;
-  SongBookScreen: undefined;
   SongArchiveScreen: undefined;
   CalendarScreen: undefined;
 };

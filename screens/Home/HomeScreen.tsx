@@ -17,20 +17,14 @@ const SPOTIFY_URL = 'https://open.spotify.com/playlist/7wkSGEKhkyGztLINK37vlv?si
 const INSTAGRAM_URL = 'https://instagram.com/spektrumrf'
 
 function HomeScreen ({ navigation, theme }) {
-    const [visitHomepage, setVisitHomepage] = useState(false)
-    const [visitSettings, setVisitSettings] = useState(false)
-    const [visitWhatsapp, setVisitWhatsapp] = useState(false)
-    const [visitFacebook, setVisitFacebook] = useState(false)
-    const [visitInstagram, setVisitInstagram] = useState(false)
-    const [visitGithub, setVisitGithub] = useState(false)
-    const [visitDiscord, setVisitDiscord] = useState(false)
-    const [visitSpotify, setVisitSpotify] = useState(false)
+    const [visit, setVisit] = useState('')
 
     const logos = {
         light: require('../../assets/images/logo-black.png'),
         dark: require('../../assets/images/logo-white.png'),
         pink: require('../../assets/images/logo-pink.png')
     }
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar
@@ -39,8 +33,8 @@ function HomeScreen ({ navigation, theme }) {
             <TouchableHighlight
                 activeOpacity={1}
                 underlayColor={theme.background}
-                onShowUnderlay={() => setVisitSettings(true)}
-                onHideUnderlay={() => setVisitSettings(false)}
+                onShowUnderlay={() => setVisit('settings')}
+                onHideUnderlay={() => setVisit('')}
                 style={styles.settings}
                 onPress={() => {
                     navigation.navigate('Root', {
@@ -55,14 +49,14 @@ function HomeScreen ({ navigation, theme }) {
                     name='settings'
                     type='feather'
                     size={30}
-                    color={visitSettings ? theme.primary : theme.text}
+                    color={visit === 'settings' ? theme.primary : theme.text}
                 />
             </TouchableHighlight>
             <TouchableHighlight
                 activeOpacity={1}
                 underlayColor={theme.background}
-                onShowUnderlay={() => setVisitHomepage(true)}
-                onHideUnderlay={() => setVisitHomepage(false)}
+                onShowUnderlay={() => setVisit('homepage')}
+                onHideUnderlay={() => setVisit('')}
                 onPress={() => { WebBrowser.openBrowserAsync(HOMEPAGE_URL) }}
             >
                 <ImageBackground
@@ -70,7 +64,7 @@ function HomeScreen ({ navigation, theme }) {
                     source={logos.pink}>
                     <Image
                         style={{ zIndex: 1, position: 'absolute', ...styles.logo }}
-                        source={visitHomepage ? null : logos[theme.id]}
+                        source={visit === 'homepage' ? null : logos[theme.id]}
                     />
                 </ImageBackground>
             </TouchableHighlight>
@@ -81,13 +75,13 @@ function HomeScreen ({ navigation, theme }) {
                 <TouchableHighlight
                     activeOpacity={1}
                     underlayColor={theme.background}
-                    onShowUnderlay={() => setVisitWhatsapp(true)}
-                    onHideUnderlay={() => setVisitWhatsapp(false)}
+                    onShowUnderlay={() => setVisit('whatsapp')}
+                    onHideUnderlay={() => setVisit('')}
                     onPress={() => { WebBrowser.openBrowserAsync(WHATSAPP_URL) }}
                     style={styles.button}
                 >
                     <Icon
-                        color={visitWhatsapp ? theme.primary : theme.text}
+                        color={visit === 'whatsapp' ? theme.primary : theme.text}
                         name='whatsapp'
                         type='fontisto'
                         size={theme.iconSize}
@@ -96,13 +90,13 @@ function HomeScreen ({ navigation, theme }) {
                 <TouchableHighlight
                     activeOpacity={1}
                     underlayColor={theme.background}
-                    onShowUnderlay={() => setVisitFacebook(true)}
-                    onHideUnderlay={() => setVisitFacebook(false)}
+                    onShowUnderlay={() => setVisit('facebook')}
+                    onHideUnderlay={() => setVisit('')}
                     onPress={() => { WebBrowser.openBrowserAsync(FACEBOOK_URL) }}
                     style={styles.button}
                 >
                     <Icon
-                        color={visitFacebook ? theme.primary : theme.text}
+                        color={visit === 'facebook' ? theme.primary : theme.text}
                         name='facebook'
                         type='fontisto'
                         size={theme.iconSize}
@@ -111,13 +105,13 @@ function HomeScreen ({ navigation, theme }) {
                 <TouchableHighlight
                     activeOpacity={1}
                     underlayColor={theme.background}
-                    onShowUnderlay={() => setVisitInstagram(true)}
-                    onHideUnderlay={() => setVisitInstagram(false)}
+                    onShowUnderlay={() => setVisit('instagram')}
+                    onHideUnderlay={() => setVisit('')}
                     onPress={() => { WebBrowser.openBrowserAsync(INSTAGRAM_URL) }}
                     style={styles.button}
                 >
                     <Icon
-                        color={visitInstagram ? theme.primary : theme.text}
+                        color={visit === 'instagram' ? theme.primary : theme.text}
                         name='instagram'
                         type='fontisto'
                         size={theme.iconSize}
@@ -128,13 +122,13 @@ function HomeScreen ({ navigation, theme }) {
                 <TouchableHighlight
                     activeOpacity={1}
                     underlayColor={theme.background}
-                    onShowUnderlay={() => setVisitGithub(true)}
-                    onHideUnderlay={() => setVisitGithub(false)}
+                    onShowUnderlay={() => setVisit('github')}
+                    onHideUnderlay={() => setVisit('')}
                     onPress={() => { WebBrowser.openBrowserAsync(GITHUB_URL) }}
                     style={styles.button}
                 >
                     <Icon
-                        color={visitGithub ? theme.primary : theme.text}
+                        color={visit === 'github' ? theme.primary : theme.text}
                         name='github'
                         type='fontisto'
                         size={theme.iconSize}
@@ -143,13 +137,13 @@ function HomeScreen ({ navigation, theme }) {
                 <TouchableHighlight
                     activeOpacity={1}
                     underlayColor={theme.background}
-                    onShowUnderlay={() => setVisitDiscord(true)}
-                    onHideUnderlay={() => setVisitDiscord(false)}
+                    onShowUnderlay={() => setVisit('discord')}
+                    onHideUnderlay={() => setVisit('')}
                     onPress={() => { WebBrowser.openBrowserAsync(DISCORD_URL) }}
                     style={styles.button}
                 >
                     <Icon
-                        color={visitDiscord ? theme.primary : theme.text}
+                        color={visit === 'discord' ? theme.primary : theme.text}
                         name='discord'
                         type='fontisto'
                         size={theme.iconSize}
@@ -158,13 +152,13 @@ function HomeScreen ({ navigation, theme }) {
                 <TouchableHighlight
                     activeOpacity={1}
                     underlayColor={theme.background}
-                    onShowUnderlay={() => setVisitSpotify(true)}
-                    onHideUnderlay={() => setVisitSpotify(false)}
+                    onShowUnderlay={() => setVisit('spotify')}
+                    onHideUnderlay={() => setVisit('')}
                     onPress={() => { WebBrowser.openBrowserAsync(SPOTIFY_URL) }}
                     style={styles.button}
                 >
                     <Icon
-                        color={visitSpotify ? theme.primary : theme.text}
+                        color={visit === 'spotify' ? theme.primary : theme.text}
                         name='spotify'
                         type='fontisto'
                         size={theme.iconSize}

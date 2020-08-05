@@ -1,12 +1,27 @@
-import * as React from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import * as WebBrowser from 'expo-web-browser'
+import { StyleSheet, TouchableOpacity, Alert } from 'react-native'
 
+import { useFirestore } from '../../hooks/useFirestore'
 import { withTheme } from '../../hooks/useTheme'
-import { Text, View } from '../../components/Themed'
+import { Text, SafeAreaView } from '../../components/Themed'
 
 function ActivitiesScreen ({ navigation, theme }) {
+    const firestore = useFirestore()
+    const [songbook, setSongbook] = useState('')
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        firestore.collection('activities').doc('songbook').get().then(res => {
+            setSongbook(res.data().url)
+            if (loading) {
+                setLoading(false);
+            }
+        })
+    })
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Fest!</Text>
             <TouchableOpacity
                 onPress={() => {
@@ -22,11 +37,11 @@ function ActivitiesScreen ({ navigation, theme }) {
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Root', {
-                        screen: 'Activities',
-                        params: {
-                            screen: 'SongBookScreen'
-                        }
+                    loading 
+                    ? Alert.alert('Laddar Sångboken ...', 'Checka din nätuppkoppling')
+                    : WebBrowser.openBrowserAsync(songbook, {
+                        enableBarCollapsing: false,
+                        toolbarColor: theme.background
                     })
                 }}
             >
@@ -44,7 +59,7 @@ function ActivitiesScreen ({ navigation, theme }) {
             >
                 <Text>Till Sångarkiv</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     )
 }
 
