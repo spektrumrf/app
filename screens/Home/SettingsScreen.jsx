@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import { StyleSheet, Switch, TouchableHighlight } from 'react-native'
+import { StyleSheet, TouchableHighlight } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
+import { RadioButton } from 'react-native-paper'
 
-import { useTheme } from '../../hooks/useTheme'
+import { withTheme } from '../../hooks/useTheme'
 import { View, Text } from '../../components/Themed'
 
 const REPOSITORY_URL = 'https://github.com/spektrumrf/app'
 
-export default function SettingsScreen () {
-    const { mode, theme, toggle } = useTheme()
-
+function SettingsScreen ({ theme, setTheme }) {
     const [underline, setUnderline] = useState('underline')
-    const [light, setLight] = useState(mode === 'light')
-    const [dark, setDark] = useState(mode === 'dark')
-    const toggleTheme = () => {
-        setLight(!light)
-        setDark(!dark)
-        toggle()
-    }
+    const [checked, setChecked] = useState(theme.key)
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
@@ -27,22 +20,30 @@ export default function SettingsScreen () {
                 <Text>
                     Ljus
                 </Text>
-                <Switch
-                    trackColor={{ false: theme.idleSecondary, true: theme.secondary }}
-                    thumbColor={light ? theme.primary : theme.idle}
-                    onValueChange={toggleTheme}
-                    value={light}
+                <RadioButton
+                    value='light'
+                    status={ checked === 'light' ? 'checked' : 'unchecked' }
+                    onPress={() => {
+                        setTheme('light')
+                        setChecked('light')
+                    }}
+                    color={theme.primary}
+                    uncheckedColor={theme.idle}
                 />
             </View>
             <View style={styles.toggle}>
                 <Text>
                     Mörk
                 </Text>
-                <Switch
-                    trackColor={{ false: theme.idleSecondary, true: theme.secondary }}
-                    thumbColor={dark ? theme.primary : theme.idle}
-                    onValueChange={toggleTheme}
-                    value={dark}
+                <RadioButton
+                    value='dark'
+                    status={ checked === 'dark' ? 'checked' : 'unchecked' }
+                    onPress={() => {
+                        setTheme('dark')
+                        setChecked('dark')
+                    }}
+                    color={theme.primary}
+                    uncheckedColor={theme.idle}
                 />
             </View>
             <Text style={styles.title}>
@@ -86,3 +87,5 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     }
 })
+
+export default withTheme(SettingsScreen)

@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { StyleSheet } from 'react-native'
 
+import { withTheme } from '../../hooks/useTheme'
 import { Text, View } from '../../components/Themed'
 
-export default function LunchScreen () {
+function LunchScreen ({ theme }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Lunch!</Text>
@@ -22,3 +23,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 })
+
+export default withTheme(LunchScreen)

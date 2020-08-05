@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
 
-import { useTheme } from '../hooks/useTheme'
+import { withTheme } from '../hooks/useTheme'
 import { DefaultTheme, DarkTheme } from '../constants/Theme'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import { RootStackParamList } from '../types'
@@ -11,16 +11,17 @@ import LinkingConfiguration from './LinkingConfiguration'
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
-export default function Navigation () {
-    const { mode } = useTheme()
+function Navigation ({ theme }) {
     return (
         <NavigationContainer
             linking={LinkingConfiguration}
-            theme={mode === 'dark' ? DarkTheme : DefaultTheme}>
+            theme={theme.key === 'dark' ? DarkTheme : DefaultTheme}>
             <RootNavigator />
         </NavigationContainer>
     )
 }
+
+export default withTheme(Navigation)
 
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal

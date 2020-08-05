@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements'
 import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils'
 
 import LoadingScreen from '../LoadingScreen'
-import { useTheme } from '../../hooks/useTheme'
+import { withTheme } from '../../hooks/useTheme'
 import Layout from '../../constants/Layout'
 import { View } from '../../components/Themed'
 import { fetchSpektrakletData } from '../../hooks/useSpektrakletApi'
@@ -17,9 +17,8 @@ const onShare = async (title, url) => {
     })
 }
 
-export default function PostScreen ({ route }) {
+function PostScreen ({ route, theme }) {
     const { id } = route.params
-    const { theme } = useTheme()
 
     const [post, setPost] = useState()
     const [loading, setLoading] = useState(true)
@@ -113,3 +112,5 @@ const styles = StyleSheet.create({
         paddingRight: 15
     }
 })
+
+export default withTheme(PostScreen)

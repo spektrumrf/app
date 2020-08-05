@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements'
 import Emoji from 'react-native-emoji'
 import * as React from 'react'
 
-import { useTheme } from '../hooks/useTheme'
+import { withTheme } from '../hooks/useTheme'
 import HomeScreen from '../screens/Home/HomeScreen'
 import SettingsScreen from '../screens/Home/SettingsScreen'
 import LunchScreen from '../screens/Lunch/LunchScreen'
@@ -18,8 +18,7 @@ import { BottomTabParamList, HomeParamList, LunchParamList, SpektrakletParamList
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
-export default function BottomTabNavigator () {
-    const { theme } = useTheme()
+function BottomTabNavigator ({ theme }) {
     return (
         <BottomTab.Navigator
             initialRouteName='Home'
@@ -57,6 +56,8 @@ export default function BottomTabNavigator () {
         </BottomTab.Navigator>
     )
 }
+
+export default withTheme(BottomTabNavigator)
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab

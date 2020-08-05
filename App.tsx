@@ -1,9 +1,7 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { AppearanceProvider } from 'react-native-appearance'
 
-import { ThemeManager } from './hooks/useTheme'
-
+import { ThemeContextProvider } from './hooks/useTheme'
 import useCachedResources from './hooks/useCachedResources'
 import Navigation from './navigation'
 
@@ -15,11 +13,9 @@ export default function App () {
     } else {
         return (
             <SafeAreaProvider>
-                <AppearanceProvider>
-                    <ThemeManager>
-                        <Navigation />
-                    </ThemeManager>
-                </AppearanceProvider>
+                <ThemeContextProvider>
+                    <Navigation />
+                </ThemeContextProvider>
             </SafeAreaProvider>
         )
     }

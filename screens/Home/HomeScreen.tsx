@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, TouchableHighlight, Image, ImageBackground } from 'react-native'
 import { Icon } from 'react-native-elements'
 
-import { useTheme } from '../../hooks/useTheme'
+import { withTheme } from '../../hooks/useTheme'
 import Layout from '../../constants/Layout'
 import { Text, View, SafeAreaView } from '../../components/Themed'
 
@@ -16,9 +16,7 @@ const DISCORD_URL = 'https://discord.gg/JKyBHeA'
 const SPOTIFY_URL = 'https://open.spotify.com/playlist/7wkSGEKhkyGztLINK37vlv?si=ulKr4CsTQISATz8x4JK1Zg'
 const INSTAGRAM_URL = 'https://instagram.com/spektrumrf'
 
-export default function HomeScreen ({ navigation }) {
-    const { mode, theme } = useTheme()
-
+function HomeScreen ({ navigation, theme }) {
     const [visitHomepage, setVisitHomepage] = useState(false)
     const [visitSettings, setVisitSettings] = useState(false)
     const [visitWhatsapp, setVisitWhatsapp] = useState(false)
@@ -36,7 +34,7 @@ export default function HomeScreen ({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar
-                style={mode === 'dark' ? 'light' : 'dark'}
+                style={theme.key === 'dark' ? 'light' : 'dark'}
             />
             <TouchableHighlight
                 activeOpacity={1}
@@ -72,7 +70,7 @@ export default function HomeScreen ({ navigation }) {
                     source={logos.pink}>
                     <Image
                         style={{ zIndex: 1, position: 'absolute', ...styles.logo }}
-                        source={visitHomepage ? null : logos[mode]}
+                        source={visitHomepage ? null : logos[theme.key]}
                     />
                 </ImageBackground>
             </TouchableHighlight>
@@ -205,3 +203,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
+
+export default withTheme(HomeScreen)

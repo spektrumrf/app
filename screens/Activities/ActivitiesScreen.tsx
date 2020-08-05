@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 
+import { withTheme } from '../../hooks/useTheme'
 import { Text, View } from '../../components/Themed'
 
-export default function ActivitiesScreen ({ navigation }) {
+function ActivitiesScreen ({ navigation, theme }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Fest!</Text>
@@ -58,3 +59,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 })
+
+export default withTheme(ActivitiesScreen)

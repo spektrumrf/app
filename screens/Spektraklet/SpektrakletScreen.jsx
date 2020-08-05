@@ -5,13 +5,11 @@ import HTML from 'react-native-render-html'
 import { Card } from 'react-native-elements'
 
 import LoadingScreen from '../LoadingScreen'
-import { useTheme } from '../../hooks/useTheme'
+import { withTheme } from '../../hooks/useTheme'
 import { SafeAreaView } from '../../components/Themed'
 import { fetchSpektrakletData } from '../../hooks/useSpektrakletApi'
 
-export default function SpektrakletSceen ({ navigation }) {
-    const { theme } = useTheme()
-
+function SpektrakletSceen ({ navigation, theme }) {
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true)
@@ -141,3 +139,5 @@ const styles = StyleSheet.create({
         flex: 1
     }
 })
+
+export default withTheme(SpektrakletSceen)

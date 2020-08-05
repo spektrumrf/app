@@ -1,9 +1,11 @@
 const primary = '#FF60A5'
 const secondary = 'pink'
-const idlePrimary = 'lightgray'
-const idleSecondary = 'gray'
 
 export const ThemeColors = {
+    key: {
+        light: 'light',
+        dark: 'dark'
+    },
     text: {
         light: 'black',
         dark: 'white'
@@ -21,12 +23,8 @@ export const ThemeColors = {
         dark: secondary
     },
     idle: {
-        light: idlePrimary,
-        dark: idlePrimary
-    },
-    idleSecondary: {
-        light: idleSecondary,
-        dark: idleSecondary
+        light: 'gray',
+        dark: 'gray'
     },
     tabIconSelected: {
         light: primary,
