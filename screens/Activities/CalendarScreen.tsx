@@ -5,7 +5,7 @@ import { Card } from 'react-native-elements'
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
 import { useCalendar } from '../../hooks/useCalendar'
-import { Text, SafeAreaView } from '../../components/Themed'
+import { Text, View } from '../../components/Themed'
 
 function CalendarScreen ({ theme }) {
     const [calendar, setCalendar] = useState([])
@@ -18,14 +18,13 @@ function CalendarScreen ({ theme }) {
                 setLoading(false)
             }
         })
-    })
+    }, [])
     return (
         loading ? <LoadingScreen/>
-            : <SafeAreaView style={styles.container}>
-                <Text>Spektrums Händelsekalender!</Text>
+            : <View style={styles.container}>
                 <FlatList
                     data={calendar}
-                    keyExtractor={item => item.date}
+                    keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => (
                         <Card
                             title={item.event}
@@ -38,15 +37,13 @@ function CalendarScreen ({ theme }) {
                         </Card>
                     )}
                 />
-            </SafeAreaView>
+            </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
     title: {
         fontSize: 20,

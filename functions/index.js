@@ -21,9 +21,15 @@ const listEvents = (calendarId, auth) => {
                 const events = res.data.items
                 const result = []
                 if (events.length) {
+                    let id = 1
                     for (const event of events) {
                         const start = event.start.dateTime || event.start.date
-                        result.push({ event: event.summary, date: start })
+                        result.push({
+                            id: id,
+                            event: event.summary,
+                            date: start
+                        })
+                        id++
                     }
                 }
                 resolve(result)
