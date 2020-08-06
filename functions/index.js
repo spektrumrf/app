@@ -39,6 +39,11 @@ const listEvents = (calendarId, auth) => {
 }
 
 exports.retrieveCalendarEvents = functions.https.onRequest((request, response) => {
+    
+    if (request.body.password !== googleCredentials.password) {
+        response.status(401).send({ status: 401, message: 'Unauthorized' })
+    }
+
     const oAuth2Client = new OAuth2(
         googleCredentials.web.client_id,
         googleCredentials.web.client_secret,

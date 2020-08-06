@@ -18,7 +18,7 @@ function ActivitiesScreen ({ navigation, theme }) {
                 setLoading(false)
             }
         })
-    })
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,7 +33,7 @@ function ActivitiesScreen ({ navigation, theme }) {
                     })
                 }}
             >
-                <Text>Till Kalender</Text>
+                <Text>Till Händelsekalendern</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {

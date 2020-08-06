@@ -1,4 +1,4 @@
-import { env } from '../env'
+import env from '../env'
 
 export const useCalendar = async () => {
     try {
@@ -7,7 +7,10 @@ export const useCalendar = async () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ calendarId: env.calendar.calendarId })
+            body: JSON.stringify({
+                calendarId: env.calendar.calendarId,
+                password: env.calendar.password
+            })
         })
         const json = response.json()
         return json

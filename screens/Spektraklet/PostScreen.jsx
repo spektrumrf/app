@@ -34,7 +34,7 @@ function PostScreen ({ route, theme }) {
             }
         })
         return () => mounted = false
-    })
+    }, [])
 
     const tagsStyles = {
         a: {
@@ -57,12 +57,14 @@ function PostScreen ({ route, theme }) {
         <View style={styles.container}>
             {!loading ? (
                 <ScrollView>
-                    <HTML
-                        html={post.title.rendered}
-                        baseFontStyle={{ fontSize: 25, fontWeight: 'bold', color: theme.text }}
-                    />
+                    <View style={styles.element}>
+                        <HTML
+                            html={post.title.rendered}
+                            baseFontStyle={{ fontSize: 25, fontWeight: 'bold', color: theme.text }}
+                        />
+                    </View>
                     <TouchableHighlight
-                        style={styles.container}
+                        style={styles.element}
                         activeOpacity={1}
                         underlayColor={theme.background}
                         onShowUnderlay={() => setShare(true)}
@@ -107,9 +109,10 @@ function PostScreen ({ route, theme }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 15,
         paddingLeft: 15,
         paddingRight: 15
+    }, element: {
+        paddingTop: 15
     }
 })
 

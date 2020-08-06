@@ -15,6 +15,6 @@ export async function storeData (key: string, value: string) {
     try {
         await AsyncStorage.setItem(key, value)
     } catch (error) {
-        console.log('error storing data')
+        console.error('error storing data')
     }
 }

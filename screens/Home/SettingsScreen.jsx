@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
+        paddingBottom: 10,
         fontWeight: 'bold',
         flexDirection: 'row',
         justifyContent: 'space-between'
