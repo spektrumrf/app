@@ -1,13 +1,44 @@
-import * as React from 'react'
-import { StyleSheet } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, FlatList } from 'react-native'
+import { Card } from 'react-native-elements'
 
-import { Text, View } from '../../components/Themed'
+import LoadingScreen from '../LoadingScreen'
+import { withTheme } from '../../hooks/useTheme'
+import { useCalendar } from '../../hooks/useCalendar'
+import { Text, SafeAreaView } from '../../components/Themed'
 
-export default function CalendarScreen () {
+function CalendarScreen ({ theme }) {
+    const [calendar, setCalendar] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        useCalendar().then(res => {
+            setCalendar(res)
+            if (loading) {
+                setLoading(false)
+            }
+        })
+    })
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Kalender!!</Text>
-        </View>
+        loading ? <LoadingScreen/>
+            : <SafeAreaView style={styles.container}>
+                <Text>Spektrums Händelsekalender!</Text>
+                <FlatList
+                    data={calendar}
+                    keyExtractor={item => item.date}
+                    renderItem={({ item }) => (
+                        <Card
+                            title={item.event}
+                            containerStyle={{ borderRadius: 10, backgroundColor: theme.background }}
+                            titleStyle={{
+                                color: theme.text
+                            }}
+                        >
+                            <Text>{item.date}</Text>
+                        </Card>
+                    )}
+                />
+            </SafeAreaView>
     )
 }
 
@@ -22,3 +53,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 })
+
+export default withTheme(CalendarScreen)

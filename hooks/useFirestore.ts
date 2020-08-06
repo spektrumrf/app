@@ -5,9 +5,9 @@ import { env } from '../env'
 export const useFirestore = () => {
     if (!firebase.apps.length) {
         const firebaseConfig = {
-            projectId: env.projectId,
-            apiKey: env.apiKey,
-            authDomain: env.authDomain
+            projectId: env.firebase.projectId,
+            apiKey: env.firebase.apiKey,
+            authDomain: env.firebase.authDomain
         }
         firebase.initializeApp(firebaseConfig)
     }

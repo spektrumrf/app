@@ -9,13 +9,13 @@ import { Text, SafeAreaView } from '../../components/Themed'
 function ActivitiesScreen ({ navigation, theme }) {
     const firestore = useFirestore()
     const [songbook, setSongbook] = useState('')
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         firestore.collection('activities').doc('songbook').get().then(res => {
             setSongbook(res.data().url)
             if (loading) {
-                setLoading(false);
+                setLoading(false)
             }
         })
     })
@@ -37,12 +37,12 @@ function ActivitiesScreen ({ navigation, theme }) {
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
-                    loading 
-                    ? Alert.alert('Laddar Sångboken ...', 'Checka din nätuppkoppling')
-                    : WebBrowser.openBrowserAsync(songbook, {
-                        enableBarCollapsing: false,
-                        toolbarColor: theme.background
-                    })
+                    loading
+                        ? Alert.alert('Laddar Sångboken ...', 'Checka din nätuppkoppling')
+                        : WebBrowser.openBrowserAsync(songbook, {
+                            enableBarCollapsing: false,
+                            toolbarColor: theme.background
+                        })
                 }}
             >
                 <Text>Till Sångbok</Text>
