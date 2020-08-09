@@ -1,5 +1,5 @@
 
-export const fetchSpektrakletData = async (route: string) => {
+export const fetchSpektraklet = async (route: string) => {
     try {
         const response = await fetch(`https://spektrum.fi/spektraklet/wp-json/wp/v2/${route}`, {
             method: 'get',
@@ -7,7 +7,7 @@ export const fetchSpektrakletData = async (route: string) => {
                 Accept: 'application/json'
             }
         })
-        const json = response.json()
+        const json = await response.json()
         return json
     } catch (error) {
         console.error(error)

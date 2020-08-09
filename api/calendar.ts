@@ -1,6 +1,6 @@
-import env from '../env'
+import env from '../env.json'
 
-export const useCalendar = async () => {
+export const fetchCalendar = async () => {
     try {
         const response = await fetch(env.calendar.url, {
             method: 'post',
@@ -12,7 +12,7 @@ export const useCalendar = async () => {
                 password: env.calendar.password
             })
         })
-        const json = response.json()
+        const json = await response.json()
         return json
     } catch (error) {
         console.error(error)

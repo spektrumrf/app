@@ -4,12 +4,14 @@ import * as WebBrowser from 'expo-web-browser'
 import HTML from 'react-native-render-html'
 import { Icon } from 'react-native-elements'
 import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils'
+import moment from 'moment'
 
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
 import Layout from '../../constants/Layout'
-import { View } from '../../components/Themed'
-import { fetchSpektrakletData } from '../../hooks/useSpektrakletApi'
+import { View, Text } from '../../components/Themed'
+import { useFirestore } from '../../hooks/useFirestore'
+import { fetchSpektraklet } from '../../api/spektraklet'
 
 const onShare = async (title, url) => {
     Share.share({
@@ -17,20 +19,42 @@ const onShare = async (title, url) => {
     })
 }
 
+const decodeHtmlCharCodes = (str) =>
+        str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
+            String.fromCharCode(charCode))
+
 function PostScreen ({ route, theme }) {
     const { id } = route.params
 
-    const [post, setPost] = useState()
+    const firestore = useFirestore()
+
+    const [content, setContent] = useState('')
+    const [title, setTitle] = useState('')
+    const [authorId, setAuthorId] = useState('')
+    const [link, setLink] = useState('')
+    const [author, setAuthor] = useState('')
+    const [date, setDate] = useState('')
     const [loading, setLoading] = useState(true)
     const [share, setShare] = useState(false)
 
     useEffect(() => {
         let mounted = true
         const route = `posts/${id}`
-        fetchSpektrakletData(route).then(res => {
+        fetchSpektraklet(route).then(res => {
             if (mounted) {
-                setPost(res)
+                setContent(res.content.rendered)
+                setLink(res.link)
+                setTitle(decodeHtmlCharCodes(res.title.rendered))
+                setAuthorId(res.author)
+                setDate(moment(res.date).format('YYYY-MM-DD'))
                 setLoading(false)
+
+                firestore.collection('activities').doc('writers').get().then(res => {
+                    const authors = res.data()
+                    console.log(authorId, authors[authorId])
+                    setAuthor(authors[authorId])
+                    setLoading(false)
+                })
             }
         })
         return () => mounted = false
@@ -58,11 +82,16 @@ function PostScreen ({ route, theme }) {
             {!loading ? (
                 <ScrollView>
                     <View style={styles.element}>
-                        <HTML
-                            html={post.title.rendered}
-                            baseFontStyle={{ fontSize: 25, fontWeight: 'bold', color: theme.text }}
-                        />
+                    <Text style={{ color: theme.text, ...styles.title }} >
+                        {title}
+                    </Text>
                     </View>
+                    <Text style={{ color: theme.text }} >
+                        {author}
+                    </Text>
+                    <Text style={{ color: theme.text }} >
+                        {date}
+                    </Text>
                     <TouchableHighlight
                         style={styles.element}
                         activeOpacity={1}
@@ -70,7 +99,7 @@ function PostScreen ({ route, theme }) {
                         onShowUnderlay={() => setShare(true)}
                         onHideUnderlay={() => setShare(false)}
                         onPress={() =>
-                            onShare(post.title.rendered, post.link)
+                            onShare(title, link)
                         }>
                         <Icon
                             color={share ? theme.primary : theme.text}
@@ -81,7 +110,7 @@ function PostScreen ({ route, theme }) {
                     </TouchableHighlight>
                     <HTML
                         style={{ alignSelf: 'center' }}
-                        html={post.content.rendered}
+                        html={content}
                         baseFontStyle={{ fontSize: 18, color: theme.text }}
                         tagsStyles={tagsStyles}
                         imagesMaxWidth={Layout.window.width - 30}
@@ -111,7 +140,12 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 15,
         paddingRight: 15
-    }, element: {
+    },
+    title: {
+        fontSize: 25,
+        fontWeight: 'bold'
+    },
+    element: {
         paddingTop: 15
     }
 })

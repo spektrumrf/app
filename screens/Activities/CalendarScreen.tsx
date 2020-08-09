@@ -4,7 +4,7 @@ import { Card } from 'react-native-elements'
 
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
-import { useCalendar } from '../../hooks/useCalendar'
+import { fetchCalendar } from '../../api/calendar'
 import { Text, View } from '../../components/Themed'
 
 function CalendarScreen ({ theme }) {
@@ -12,7 +12,7 @@ function CalendarScreen ({ theme }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        useCalendar().then(res => {
+        fetchCalendar().then(res => {
             setCalendar(res)
             if (loading) {
                 setLoading(false)
@@ -43,7 +43,7 @@ function CalendarScreen ({ theme }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     title: {
         fontSize: 20,

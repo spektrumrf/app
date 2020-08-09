@@ -1,6 +1,7 @@
 import * as firebase from 'firebase'
 import 'firebase/firestore'
-import env from '../env'
+
+import env from '../env.json'
 
 export const useFirestore = () => {
     if (!firebase.apps.length) {

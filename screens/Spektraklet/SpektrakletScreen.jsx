@@ -7,7 +7,7 @@ import { Card } from 'react-native-elements'
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
 import { SafeAreaView } from '../../components/Themed'
-import { fetchSpektrakletData } from '../../hooks/useSpektrakletApi'
+import { fetchSpektraklet } from '../../api/spektraklet'
 
 function SpektrakletSceen ({ navigation, theme }) {
     const [posts, setPosts] = useState([])
@@ -20,7 +20,7 @@ function SpektrakletSceen ({ navigation, theme }) {
     useEffect(() => {
         isMountedRef.current = true
         const route = `posts?_embed&per_page=5&page=${page}`
-        fetchSpektrakletData(route).then(res => {
+        fetchSpektraklet(route).then(res => {
             if (isMountedRef.current) {
                 if (res.code !== 'rest_post_invalid_page_number') {
                     if (refreshing) {
