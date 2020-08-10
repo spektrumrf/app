@@ -44,7 +44,7 @@ function SpektrakletSceen ({ navigation, theme }) {
             setLoading(true)
             setRefreshing(true)
             const route = 'posts?_embed&per_page=5&page=1'
-            fetchSpektrakletData(route).then(res => {
+            fetchSpektraklet(route).then(res => {
                 if (isMountedRef.current) {
                     setPage(1)
                     setPosts([...res])
