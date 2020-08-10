@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, FlatList } from 'react-native'
-import { Card } from 'react-native-elements'
+import { Card, Icon } from 'react-native-elements'
 
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
@@ -33,7 +33,16 @@ function CalendarScreen ({ theme }) {
                                 color: theme.text
                             }}
                         >
-                            <Text>{item.date}</Text>
+                            <View style={styles.row}>
+                                <Icon
+                                    style={{ paddingRight: 5 }}
+                                    color={theme.text}
+                                    name='date-range'
+                                    type='materialicons'
+                                    size={18}
+                                />
+                                <Text>{item.date}</Text>
+                            </View>
                         </Card>
                     )}
                 />
@@ -48,6 +57,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    row: {
+        flexDirection: 'row'
     }
 })
 
