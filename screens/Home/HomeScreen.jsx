@@ -34,7 +34,6 @@ function HomeScreen ({ navigation, theme }) {
     }
 
     const SocialIcon = ({ name }) => {
-
         const [state, setState] = useState('')
 
         return (
