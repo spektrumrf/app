@@ -24,10 +24,10 @@ function LunchScreen ({ theme }) {
     const formatFood = (food: any) => {
         return food.map((x, i) => {
             return <View style={styles.row} key={i}>{
-                x.map(y => {
+                x.map((y, j) => {
                     if (y.toLowerCase().includes('tiedoitus')) {
                         return <Icon
-                            key={0}
+                            key={j}
                             style={{ paddingRight: 5 }}
                             color={theme.text}
                             name='info-outline'
@@ -36,26 +36,28 @@ function LunchScreen ({ theme }) {
                         />
                     } else if (y.toLowerCase().includes('päivän lounas')) {
                         return <Icon
-                            key={0}
+                            key={j}
                             style={{ paddingRight: 5 }}
                             color={theme.text}
                             name='restaurant-menu'
                             type='ionicons'
                             size={18}
                         />
-                    } else if (y.toLowerCase().includes('allergeenit')) {
+                    } else if (y.toLowerCase().includes('makeasti')) {
                         return <Icon
-                            key={0}
-                            style={{ paddingRight: 9 }}
+                            key={j}
+                            style={{ paddingRight: 5 }}
                             color={theme.text}
-                            name='allergies'
-                            type='font-awesome-5'
-                            size={15}
+                            name='cupcake'
+                            type='material-community'
+                            size={18}
                         />
-                    } else if (x[0].toLowerCase().includes('päivän lounas')) {
-                        return <Text style={{ flexShrink: 1, fontWeight: 'bold' }} key={i}>{y}</Text>
+                    } else if (y.toLowerCase().includes('allergeenit')) {
+                        return <Text style={{ paddingRight: 24 }} key={j}>{''}</Text>
+                    } else if (x[0].toLowerCase().includes('päivän lounas') || x[0].toLowerCase().includes('makeasti') ) {
+                        return <Text style={{ flexShrink: 1, fontWeight: 'bold' }} key={j}>{y}</Text>
                     } else {
-                        return <Text style={{ flexShrink: 1 }} key={1}>{y}</Text>
+                        return <Text style={{ flexShrink: 1 }} key={j}>{y}</Text>
                     }
                 })
             }</View>

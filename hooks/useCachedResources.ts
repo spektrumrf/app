@@ -28,8 +28,7 @@ export default function useCachedResources () {
 
                 // Load fonts
                 const fontAssets = Font.loadAsync({
-                    ...Ionicons.font,
-                    'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf')
+                    ...Ionicons.font
                 })
 
                 await Promise.all([...imageAssets, fontAssets])

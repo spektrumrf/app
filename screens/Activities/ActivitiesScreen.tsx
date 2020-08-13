@@ -67,7 +67,7 @@ function ActivitiesScreen ({ navigation, theme }) {
                 title={'Sångbok'}
                 name={'book'}
             />
-            <ActivityButton
+            {/* <ActivityButton
                 onPress={() => {
                     navigation.navigate('Root', {
                         screen: 'Activities',
@@ -78,7 +78,7 @@ function ActivitiesScreen ({ navigation, theme }) {
                 }}
                 title={'Sångarkiv'}
                 name={'archive'}
-            />
+            /> */}
             <ActivityButton
                 onPress={() => {
                     navigation.navigate('Root', {
@@ -88,7 +88,7 @@ function ActivitiesScreen ({ navigation, theme }) {
                         }
                     })
                 }}
-                title={'Händelsekalendern'}
+                title={'Kalender'}
                 name={'calendar'}
             />
         </SafeAreaView>
