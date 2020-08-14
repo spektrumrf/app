@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, FlatList, RefreshControl } from 'react-native'
 import { Card, Icon } from 'react-native-elements'
 
 import { fetchLunch } from '../../api/lunch'
@@ -11,6 +11,7 @@ import LoadingScreen from '../LoadingScreen'
 function LunchScreen ({ theme }) {
     const [lunch, setLunch] = useState([])
     const [loading, setLoading] = useState(true)
+    const [refreshing, setRefreshing] = useState(false)
 
     useEffect(() => {
         fetchLunch().then(res => {
@@ -18,8 +19,11 @@ function LunchScreen ({ theme }) {
             if (loading) {
                 setLoading(false)
             }
+            if (refreshing) {
+                setRefreshing(false)
+            }
         })
-    }, [])
+    }, [refreshing])
 
     const formatFood = (food: any) => {
         return food.map((x, i) => {
@@ -69,6 +73,12 @@ function LunchScreen ({ theme }) {
             {loading
                 ? <LoadingScreen/>
                 : <FlatList
+                    refreshControl={<RefreshControl
+                        colors={[theme.primary]}
+                        tintColor={theme.primary}
+                        refreshing={refreshing}
+                        onRefresh={() => setRefreshing(true)} />
+                    }
                     data={lunch}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => (

@@ -22,7 +22,8 @@ const allergens = {
     'seesaminsiemeniä': 'sesamfrön',
     'maapähkinää': 'jordnötter',
     'maitoa': 'mjölk',
-    'kananmunaa': 'ägg'
+    'kananmunaa': 'ägg',
+    'selleriä': 'selleri'
 }
 
 const fetchRestaurant = async (url, name, id) => {
