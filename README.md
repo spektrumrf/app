@@ -15,24 +15,16 @@ npm install -g expo-cli
 expo start
 ```
 
-## Optimize assets
-
-```
-npx expo-optimize
-```
-
 ## New packages
 
 ```
 expo install <package>
 ```
 
-Trouble?
+## Optimize assets
 
 ```
-rm -r node_modules
-npm install expo
-expo install
+npx expo-optimize
 ```
 
 ## Calendar API Setup
@@ -46,7 +38,9 @@ expo install
     3. Exchange authorization code for tokens
     4. Place refresh-token in `credentials.json`
 
-## Deploy Cloud Functions
+To access the API we can use the Node library `googleapis`. Cloud functions are used for that purpose ...
+
+### Deploy Cloud Functions
 
 ```
 cd functions

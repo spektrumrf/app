@@ -47,7 +47,6 @@ function HomeScreen ({ navigation, theme }) {
                         ? Alert.alert(`Laddar ${name} ...`, 'Checka din nätuppkoppling')
                         : WebBrowser.openBrowserAsync(urls[name])
                 }}
-                style={styles.button}
             >
                 <Icon
                     color={state === name ? theme.primary : theme.text}
@@ -137,10 +136,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginVertical: 15
-    },
-    button: {
-        paddingTop: 15
+        marginVertical: 30
     },
     description: {
         marginVertical: 30,

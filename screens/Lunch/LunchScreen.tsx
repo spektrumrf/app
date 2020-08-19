@@ -56,9 +56,18 @@ function LunchScreen ({ theme }) {
                             type='material-community'
                             size={18}
                         />
+                    } else if (y.toLowerCase().includes('vegaani')) {
+                        return <Icon
+                            key={j}
+                            style={{ paddingRight: 5 }}
+                            color={theme.text}
+                            name='leaf'
+                            type='entypo'
+                            size={18}
+                        />
                     } else if (y.toLowerCase().includes('allergeenit')) {
                         return <Text style={{ paddingRight: 24 }} key={j}>{''}</Text>
-                    } else if (x[0].toLowerCase().includes('päivän lounas') || x[0].toLowerCase().includes('makeasti') ) {
+                    } else if (x[0].toLowerCase().includes('päivän lounas') || x[0].toLowerCase().includes('makeasti') || x[0].toLowerCase().includes('vegaani')) {
                         return <Text style={{ flexShrink: 1, fontWeight: 'bold' }} key={j}>{y}</Text>
                     } else {
                         return <Text style={{ flexShrink: 1 }} key={j}>{y}</Text>

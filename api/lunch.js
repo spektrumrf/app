@@ -4,6 +4,7 @@ import moment from 'moment'
 const KAIVOPIHA_URL = 'https://messi.hyyravintolat.fi/rss/sve/9'
 const CHEMICUM_URL = 'https://messi.hyyravintolat.fi/rss/sve/10'
 const EXACTUM_URL = 'https://messi.hyyravintolat.fi/rss/sve/11'
+const PORTHANIA_URL = 'https://messi.hyyravintolat.fi/rss/sve/39'
 const CHEMICUM_EMPLOYEES_URL = 'https://messi.hyyravintolat.fi/rss/sve/41'
 
 const days = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag']
@@ -18,12 +19,16 @@ const allergens = {
     'kalaa': 'fisk',
     'sinappia': 'senap',
     'Sisältää luomua': 'innehåller ekologiskt',
-    'Sisältää Reilun kaupan tuotteita': 'innehåller fair trade',
+    'Sisältää Reilun kaupan tuotteita': 'innehåller fair trade varor',
     'seesaminsiemeniä': 'sesamfrön',
     'maapähkinää': 'jordnötter',
     'maitoa': 'mjölk',
     'kananmunaa': 'ägg',
-    'selleriä': 'selleri'
+    'selleriä': 'selleri',
+    'sinapinsiemeniä': 'senapsfrön',
+    'pyydä G': 'be om G',
+    'siemeniä': 'frön',
+    'pähkinää': 'nötter'
 }
 
 const fetchRestaurant = async (url, name, id) => {
@@ -95,7 +100,8 @@ export const fetchLunch = async () => {
         fetchRestaurant(KAIVOPIHA_URL, 'Kaivopiha', 1),
         fetchRestaurant(CHEMICUM_URL, 'Chemicum', 2),
         fetchRestaurant(EXACTUM_URL, 'Exactum', 3),
-        fetchRestaurant(CHEMICUM_EMPLOYEES_URL, 'Chemicum Personal', 4)
+        fetchRestaurant(CHEMICUM_EMPLOYEES_URL, 'Chemicum Personal', 4),
+        fetchRestaurant(PORTHANIA_URL, 'Porthania', 5)
     ])
     return lunch
 }
