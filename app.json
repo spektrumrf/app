@@ -25,7 +25,11 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "package": "fi.spektrum.app"
+      "package": "fi.spektrum.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FF60A5",
+        "foregroundImage": "./assets/images/launcher.png"
+      }
     }
   }
 }
