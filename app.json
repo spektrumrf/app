@@ -22,12 +22,12 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/icon.png"
     },
     "android": {
       "package": "fi.spektrum.app",
       "permissions": [],
-      "versionCode": "1.0", 
+      "versionCode": 1, 
       "adaptiveIcon": {
         "backgroundColor": "#FF60A5",
         "foregroundImage": "./assets/images/launcher.png"

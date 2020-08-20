@@ -10,13 +10,8 @@ export function useThemeColor (colorName : string) {
     return theme[colorName]
 }
 
-type ThemeProps = {
-  lightColor?: string;
-  darkColor?: string;
-};
-
-export type TextProps = ThemeProps & DefaultText['props'];
-export type ViewProps = ThemeProps & DefaultView['props'];
+export type TextProps = DefaultText['props'];
+export type ViewProps = DefaultView['props'];
 
 export function Text (props: TextProps) {
     const { style, ...otherProps } = props
