@@ -26,6 +26,8 @@
     },
     "android": {
       "package": "fi.spektrum.app",
+      "permissions": [],
+      "versionCode": "1.0", 
       "adaptiveIcon": {
         "backgroundColor": "#FF60A5",
         "foregroundImage": "./assets/images/launcher.png"

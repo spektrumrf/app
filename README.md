@@ -1,6 +1,9 @@
 
 # Spektrum App
 
+[![](https://img.shields.io/badge/Version-1.0-blue)](https://github.com/spektrumrf/app/releases)
+[![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Set up Expo
 
 (Node installed e.g. `curl -L https://git.io/n-install | bash`)
