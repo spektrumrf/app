@@ -4,8 +4,38 @@
 [![](https://img.shields.io/badge/Version-1.0-blue)](https://github.com/spektrumrf/app/releases)
 [![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+[<img src="https://github.com/spektrumrf/assets/raw/master/images/playstore/ic-launcher.png" width="100">](https://play.google.com/store/apps/details?id=fi.spektrum.app)
+
+----
+
+Android application for the Spektrum student association with a couple of handy features for members. Here are the various screens in the app:
+
+**Home**
+
+- Links to different forms of media where Spektrum is present
+- Settings from where you can change themes
+
+**Lunch**
+
+- Fetches the university lunch menu
+- Different types of food categorized with vector icons
+
+**Spektraklet**
+
+- Lists articles in our student paper
+- Posts can be opened in a mobile friendly way with sharing ability
+
+**Activities**
+
+- Link to the Spektrum songbook
+- Calendar with dates of upcoming events
+
+----
+
+## Directory structure
+
 <details>
-<summary>Directory Structure</summary>
+<summary>Toggle</summary>
 <p>
 
 ```
@@ -79,6 +109,12 @@
 npm install -g expo-cli
 ```
 
+## Install dependencies
+
+```
+npm i
+```
+
 ## Secrets
 
 Request access to
@@ -110,11 +146,11 @@ React Native is a cross-platform mobile framework, however the annual fee for an
 
 ## Cloud Functions
 
-Connecting to Google Calendar requires a OAuth handshake, a service account is set up for this purpose. A Cloud Function on Firebase accessible via Google Cloud Console use the credentials for this account to access the desired Spektrum Google Calendar. In depth information can be found in the document in [the Secrets part](##Secrets).
+Connecting to Google Calendar requires an OAuth handshake, a service account is set up for this purpose. A Cloud Function on Firebase accessible via Google Cloud Console use the credentials for this account to access the desired Spektrum Google Calendar. In depth information can be found in the document in [the Secrets part](##Secrets).
 
 Any backend stuff that needs Node.js (in this case the `googleapis` library) can be implemented as a Cloud Function.
 
-### Develop
+### Install dependencies
 
 ```
 cd functions
