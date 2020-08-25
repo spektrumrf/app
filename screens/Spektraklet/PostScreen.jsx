@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, ScrollView, TouchableHighlight, Share } from 'react-native'
-import * as WebBrowser from 'expo-web-browser'
-import HTML from 'react-native-render-html'
 import { Icon } from 'react-native-elements'
 import { getParentsTagsRecursively } from 'react-native-render-html/src/HTMLUtils'
+import * as WebBrowser from 'expo-web-browser'
+import HTML from 'react-native-render-html'
 import moment from 'moment'
 
 import LoadingScreen from '../LoadingScreen'
