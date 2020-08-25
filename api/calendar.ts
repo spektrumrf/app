@@ -1,6 +1,7 @@
 import env from '../env.json'
+import { Calendar } from '../types'
 
-export const fetchCalendar = async () => {
+export const fetchCalendar = async (): Promise<Calendar> => {
     try {
         const response = await fetch(env.calendar.url, {
             method: 'post',

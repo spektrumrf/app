@@ -1,4 +1,5 @@
 import { parseString } from 'react-native-xml2js'
+import { Lunch, RawLunch } from '../types'
 import moment from 'moment'
 
 const KAIVOPIHA_URL = 'https://messi.hyyravintolat.fi/rss/sve/9'
@@ -31,14 +32,14 @@ const allergens = {
     'pähkinää': 'nötter'
 }
 
-const fetchRestaurant = async (url, name, id) => {
+const fetchRestaurant = async (url: string, name: string, id: number): Promise<Lunch> => {
     try {
         const response = await fetch(url, {
             method: 'get'
         })
         const xml = await response.text()
-        const parsed = await new Promise(resolve => {
-            parseString(xml, (err, result) => {
+        const parsed = await new Promise<RawLunch>(resolve => {
+            parseString(xml, (err: string, result: RawLunch) => {
                 if (err) {
                     resolve(null)
                 } else {
@@ -55,31 +56,37 @@ const fetchRestaurant = async (url, name, id) => {
                 id: id,
                 title: name,
                 date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-                food: ['Meny ur bruk']
+                menu: [{type: null, content: 'Meny ur bruk'}]
             }
         }
 
-        const date = parsed.rss.channel[0].item[day - 1].title
-        const food = parsed.rss.channel[0].item[day - 1].description[0]
+        const date = parsed.rss.channel[0].item[day - 1].title[0]
+        const menu = parsed.rss.channel[0].item[day - 1].description[0]
             .split('. ')
-            .filter(x => x)
-            .map(x => {
-                if (x.includes('Allergeenit:')) {
+            .filter(item => item)
+            .map(item => {
+                if (item.includes('Allergeenit:')) {
                     for (const key in allergens) {
-                        x = x.replace(key, allergens[key])
+                        item = item.replace(key, allergens[key])
                     }
-                    return x
+                    return item
                 } else {
-                    return x
+                    return item
                 }
             })
-            .map(x => x.split(': '))
+            .map(item => item.split(': '))
+            .map(pair => {
+                return {
+                    type: pair[0],
+                    content: pair[1]
+                }
+            })
 
         return {
             id: id,
             title: name,
             date: date,
-            food: food
+            menu: menu
         }
     } catch (error) {
         let day = new Date().getDay()
@@ -90,7 +97,7 @@ const fetchRestaurant = async (url, name, id) => {
             id: id,
             title: name,
             date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-            food: ['Meny ur bruk']
+            menu: [{type: null, content: 'Meny ur bruk'}]
         }
     }
 }

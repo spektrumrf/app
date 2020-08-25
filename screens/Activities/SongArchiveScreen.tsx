@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, FlatList, RefreshControl } from 'react-native'
 import { Card, Icon } from 'react-native-elements'
-import moment from 'moment'
 
 import { fetchSongArchive } from '../../api/songArchive'
 import { withTheme } from '../../hooks/useTheme'
@@ -26,6 +25,10 @@ function SongArchiveScreen ({ theme }) {
         })
     }, [refreshing])
 
+    const decodeHtmlCharCodes = (str: string) =>
+        str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
+            String.fromCharCode(charCode))
+
     return (
         <View style={styles.container}>
             {loading
@@ -38,7 +41,7 @@ function SongArchiveScreen ({ theme }) {
                         onRefresh={() => setRefreshing(true)} />
                     }
                     data={songArchive}
-                    keyExtractor={item => item.link[0].toString()}
+                    keyExtractor={item => item.id}
                     renderItem={({ item }) => (
                         <Card
                             title={item.title}
@@ -53,9 +56,9 @@ function SongArchiveScreen ({ theme }) {
                                     type='materialicons'
                                     size={18}
                                 />
-                                <Text>{moment(item.pubDate[0]).format('YYYY-MM-DD')}</Text>
+                                <Text>{item.date}</Text>
                             </View>
-                            <Text>{item.description[0]}</Text>
+                            <Text>{decodeHtmlCharCodes(item.description)}</Text>
                         </Card>
                     )}
                 />

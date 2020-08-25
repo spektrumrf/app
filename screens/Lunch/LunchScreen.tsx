@@ -25,68 +25,70 @@ function LunchScreen ({ theme }) {
         })
     }, [refreshing])
 
-    const formatLunch = (lunch: any) => {
-        const lunchTypes = ['päivän lounas', 'makeasti', 'vegaani', 'erikoinen']
+    const formatMenu = (menu: any) => {
+        const FormattedLunch = ({lunch, i, name, type}) => {
+            return (
+                <View style={styles.row} key={i}>
+                    <Icon
+                        key={'icon'}
+                        style={{ paddingRight: 5 }}
+                        color={theme.text}
+                        name={name}
+                        type={type}
+                        size={18}
+                    />
+                    <Text 
+                        style={{ flexShrink: 1, fontWeight: 'bold' }}
+                        key={'content'}>
+                        {lunch.content}
+                    </Text>
+                </View>
+            )
+        }
 
-        return lunch.map((x, i) => {
-            return <View style={styles.row} key={i}>{
-                x.map((y, j) => {
-                    if (x[1] == '.') {
-                        return
-                    } else if (y.toLowerCase().includes('tiedoitus')) {
-                        return <Icon
-                            key={j}
-                            style={{ paddingRight: 5 }}
-                            color={theme.text}
-                            name='info-outline'
-                            type='materialicons'
-                            size={18}
-                        />
-                    } else if (y.toLowerCase().includes('päivän lounas')) {
-                        return <Icon
-                            key={j}
-                            style={{ paddingRight: 5 }}
-                            color={theme.text}
-                            name='restaurant-menu'
-                            type='ionicons'
-                            size={18}
-                        />
-                    } else if (y.toLowerCase().includes('makeasti')) {
-                        return <Icon
-                            key={j}
-                            style={{ paddingRight: 5 }}
-                            color={theme.text}
-                            name='cupcake'
-                            type='material-community'
-                            size={18}
-                        />
-                    } else if (y.toLowerCase().includes('vegaani')) {
-                        return <Icon
-                            key={j}
-                            style={{ paddingRight: 5 }}
-                            color={theme.text}
-                            name='leaf'
-                            type='entypo'
-                            size={18}
-                        />
-                    } else if (y.toLowerCase().includes('erikoinen')) {
-                        return <Icon
-                            key={j}
-                            style={{ paddingRight: 5 }}
-                            color={theme.text}
-                            name='credit'
-                            type='entypo'
-                            size={18}
-                        />
-                    } else if (y.toLowerCase().includes('allergeenit')) {
-                        return <Text style={{ paddingRight: 24 }} key={j}>{''}</Text>
-                    } else if (lunchTypes.some(lunchType => x[0].toLowerCase().includes(lunchType))) {
-                        return <Text style={{ flexShrink: 1, fontWeight: 'bold' }} key={j}>{y}</Text>
-                    } else {
-                        return <Text style={{ flexShrink: 1 }} key={j}>{y}</Text>
-                    }
-                })
-            }</View>
+        return menu.map((lunch: {type: string, content: string}, i: number) => {
+            if (lunch.content === '.') {
+                return
+            } else if (lunch.type.toLowerCase().includes('tiedoitus')) {
+                return <FormattedLunch
+                    lunch={lunch}
+                    i={i}
+                    name={'info-outline'}   
+                    type={'materialicons'}
+                />
+            } else if (lunch.type.toLowerCase().includes('päivän lounas')) {
+                return <FormattedLunch
+                    lunch={lunch}
+                    i={i}
+                    name={'restaurant-menu'}
+                    type={'ionicons'}
+                />
+            } else if (lunch.type.toLowerCase().includes('makeasti')) {
+                return <FormattedLunch
+                    lunch={lunch}
+                    i={i}
+                    name={'cupcake'}
+                    type={'material-community'}
+                />
+            } else if (lunch.type.toLowerCase().includes('vegaani')) {
+                return <FormattedLunch
+                    lunch={lunch}
+                    i={i}
+                    name={'leaf'}
+                    type={'entypo'}
+                />
+            } else if (lunch.type.toLowerCase().includes('erikoinen')) {
+                return <FormattedLunch
+                    lunch={lunch}
+                    i={i}
+                    name={'credit'}
+                    type={'entypo'}
+                />
+            } else if (lunch.type.toLowerCase().includes('allergeenit')) {
+                return <Text style={{ paddingRight: 24 }}>
+                    {lunch.content}
+                </Text>
+            }
         })
     }
 
@@ -120,9 +122,9 @@ function LunchScreen ({ theme }) {
                                 <Text>{item.date}</Text>
                             </View>
                             {
-                                item.food.length > 1
-                                    ? <View>{formatLunch(item.food)}</View>
-                                    : <Text >{item.food}</Text>
+                                item.menu.length > 1
+                                    ? <View>{formatMenu(item.menu)}</View>
+                                    : <Text >{item.menu.content}</Text>
                             }
                         </Card>
                     )}
