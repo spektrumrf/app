@@ -46,12 +46,11 @@ Android application for the Spektrum student association with a couple of handy 
 │   ├── songArchive.ts
 │   └── spektraklet.ts
 ├── assets
-│   └── images
-│       ├── icon.png
-│       ├── launcher.png
-│       ├── logo-black.png
-│       ├── logo-pink.png
-│       └── logo-white.png
+│   ├── icon.png
+│   ├── launcher.png
+│   ├── logo-black.png
+│   ├── logo-pink.png
+│   └── logo-white.png
 ├── components
 │   └── Themed.tsx
 ├── constants

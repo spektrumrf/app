@@ -28,10 +28,10 @@ function HomeScreen ({ navigation, theme }) {
     }, [])
 
     const logos = {
-        light: require('../../assets/images/logo-black.png'),
-        dark: require('../../assets/images/logo-white.png'),
-        pink: require('../../assets/images/logo-black.png'),
-        tint: require('../../assets/images/logo-pink.png')
+        light: require('../../assets/logo-black.png'),
+        dark: require('../../assets/logo-white.png'),
+        pink: require('../../assets/logo-black.png'),
+        tint: require('../../assets/logo-pink.png')
     }
 
     function SocialIcon ({ name }) {
