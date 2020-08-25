@@ -2,8 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
 
-import { withTheme } from '../hooks/useTheme'
-import { DefaultTheme, DarkTheme } from '../constants/Theme'
+import { withTheme, getNavigatorTheme } from '../hooks/useTheme'
 import { RootStackParamList } from '../types'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import BottomTabNavigator from './BottomTabNavigator'
@@ -13,7 +12,7 @@ import BottomTabNavigator from './BottomTabNavigator'
 function Navigation ({ theme }) {
     return (
         <NavigationContainer
-            theme={theme.id === 'dark' ? DarkTheme : DefaultTheme}>
+            theme={getNavigatorTheme()}>
             <RootNavigator />
         </NavigationContainer>
     )

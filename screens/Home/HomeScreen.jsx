@@ -30,7 +30,8 @@ function HomeScreen ({ navigation, theme }) {
     const logos = {
         light: require('../../assets/images/logo-black.png'),
         dark: require('../../assets/images/logo-white.png'),
-        pink: require('../../assets/images/logo-pink.png')
+        pink: require('../../assets/images/logo-black.png'),
+        tint: require('../../assets/images/logo-pink.png')
     }
 
     const SocialIcon = ({ name }) => {
@@ -95,7 +96,7 @@ function HomeScreen ({ navigation, theme }) {
                 >
                     <ImageBackground
                         style={styles.logo}
-                        source={logos.pink}>
+                        source={logos.tint}>
                         <Image
                             style={{ zIndex: 1, position: 'absolute', ...styles.logo }}
                             source={visit === 'homepage' ? null : logos[theme.id]}

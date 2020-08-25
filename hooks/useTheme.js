@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Appearance } from 'react-native-appearance'
 
 import { retrieveData, storeData } from './useStorage'
-import { ThemeColors } from '../constants/Theme'
+import { ThemeColors, DefaultTheme, DarkTheme, PinkTheme } from '../constants/Theme'
 
 const STORAGE_KEY = 'THEME_ID'
 const ThemeContext = React.createContext()
@@ -48,6 +48,17 @@ export const ThemeContextProvider = ({ children }) => {
 export function getThemeID () {
     const { themeID } = useContext(ThemeContext)
     return themeID
+}
+
+export function getNavigatorTheme () {
+    const themeId = getThemeID()
+    if (themeId === 'light') {
+        return DefaultTheme
+    } else if (themeId === 'dark') {
+        return DarkTheme
+    } else {
+        return PinkTheme
+    }
 }
 
 export function withTheme (Component) {

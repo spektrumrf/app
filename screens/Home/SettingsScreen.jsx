@@ -48,6 +48,21 @@ function SettingsScreen ({ theme, setTheme }) {
             </View>
             <View style={styles.toggle}>
                 <Text>
+                    Rosa
+                </Text>
+                <RadioButton
+                    value='pink'
+                    status={ checked === 'pink' ? 'checked' : 'unchecked' }
+                    onPress={() => {
+                        setTheme('pink')
+                        setChecked('pink')
+                    }}
+                    color={theme.primary}
+                    uncheckedColor={theme.idle}
+                />
+            </View>
+            <View style={styles.toggle}>
+                <Text>
                     Standard
                 </Text>
                 <RadioButton
