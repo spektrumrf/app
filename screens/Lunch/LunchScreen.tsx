@@ -25,11 +25,10 @@ function LunchScreen ({ theme }) {
     }, [refreshing])
 
     function formatMenu ({ menu }) {
-        function FormattedLunch ({ lunch, index, name, type, bold }) {
+        function FormattedLunch ({ lunch, name, type, bold }) {
             return (
-                <View style={styles.row} key={index}>
+                <View style={styles.row} key={lunch.id.toString()}>
                     <Icon
-                        key={'icon'}
                         style={{ paddingRight: 5 }}
                         color={theme.text}
                         name={name}
@@ -37,7 +36,6 @@ function LunchScreen ({ theme }) {
                         size={18}
                     />
                     <Text
-                        key={'content'}
                         style={{ flexShrink: 1, fontWeight: bold ? 'bold' : 'normal' }}
                     >
                         {lunch.content}
@@ -46,7 +44,7 @@ function LunchScreen ({ theme }) {
             )
         }
 
-        return menu.map((lunch: {type: string, content: string}, index: number) => {
+        function FormattedMenu ({ lunch }) {
             if (lunch.content === '.') {
                 return null
             } else if (lunch.type.toLowerCase().includes('tiedoitus')) {
@@ -55,7 +53,6 @@ function LunchScreen ({ theme }) {
                     name={'info-outline'}
                     type={'materialicons'}
                     bold={false}
-                    index
                 />
             } else if (lunch.type.toLowerCase().includes('päivän lounas')) {
                 return <FormattedLunch
@@ -63,7 +60,6 @@ function LunchScreen ({ theme }) {
                     name={'restaurant-menu'}
                     type={'ionicons'}
                     bold={true}
-                    index
                 />
             } else if (lunch.type.toLowerCase().includes('makeasti')) {
                 return <FormattedLunch
@@ -71,7 +67,6 @@ function LunchScreen ({ theme }) {
                     name={'cupcake'}
                     type={'material-community'}
                     bold={true}
-                    index
                 />
             } else if (lunch.type.toLowerCase().includes('vegaani')) {
                 return <FormattedLunch
@@ -79,7 +74,6 @@ function LunchScreen ({ theme }) {
                     name={'leaf'}
                     type={'entypo'}
                     bold={true}
-                    index
                 />
             } else if (lunch.type.toLowerCase().includes('erikoinen')) {
                 return <FormattedLunch
@@ -87,13 +81,18 @@ function LunchScreen ({ theme }) {
                     name={'credit'}
                     type={'entypo'}
                     bold={true}
-                    index
                 />
             } else if (lunch.type.toLowerCase().includes('allergeenit')) {
-                return <Text style={{ paddingLeft: 24 }} key={index}>
+                return <Text style={{ paddingLeft: 24 }}>
                     {lunch.content}
                 </Text>
             }
+        }
+
+        return menu.map((lunch: {type: string, content: string, id: number}) => {
+            return <View style={styles.row} key={lunch.id.toString()}>
+                <FormattedMenu lunch={lunch}/>
+            </View>
         })
     }
 
@@ -109,7 +108,7 @@ function LunchScreen ({ theme }) {
                         onRefresh={() => setRefreshing(true)} />
                     }
                     data={lunch}
-                    keyExtractor={item => item.id.toString()}
+                    keyExtractor={item => item.name}
                     renderItem={({ item }) => (
                         <Card
                             title={item.title}

@@ -32,7 +32,7 @@ const allergens = {
     'pähkinää': 'nötter'
 }
 
-async function fetchRestaurant (url: string, name: string, id: number): Promise<Lunch> {
+async function fetchRestaurant (url: string, name: string): Promise<Lunch> {
     try {
         const response = await fetch(url, {
             method: 'get'
@@ -53,10 +53,9 @@ async function fetchRestaurant (url: string, name: string, id: number): Promise<
 
         if (!parsed) {
             return {
-                id: id,
                 title: name,
                 date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-                menu: [{ type: null, content: 'Meny ur bruk' }]
+                menu: [{ type: null, content: 'Meny ur bruk', id: 0 }]
             }
         }
 
@@ -75,15 +74,16 @@ async function fetchRestaurant (url: string, name: string, id: number): Promise<
                 }
             })
             .map(item => item.split(': '))
-            .map(pair => {
+            .map((pair, index) => {
                 return {
                     type: pair[0],
-                    content: pair[1]
+                    content: pair[1],
+                    id: index
                 }
             })
+        console.log(menu)    
 
         return {
-            id: id,
             title: name,
             date: date,
             menu: menu
@@ -94,10 +94,9 @@ async function fetchRestaurant (url: string, name: string, id: number): Promise<
 
         console.error(error)
         return {
-            id: id,
             title: name,
             date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-            menu: [{ type: null, content: 'Meny ur bruk' }]
+            menu: [{ type: null, content: 'Meny ur bruk', id: 0 }]
         }
     }
 }

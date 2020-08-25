@@ -44,12 +44,12 @@ export type SongArchive = {
 }[];
 
 export type Lunch= {
-  id: number;
   title: string;
   date: string;
   menu: {
     type: string;
     content: string;
+    id: number;
   }[];
 };
 

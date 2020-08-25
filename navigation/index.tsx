@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
 
-import {getNavigatorTheme } from '../hooks/useTheme'
+import { getNavigatorTheme } from '../hooks/useTheme'
 import { RootStackParamList } from '../types'
 import NotFoundScreen from '../screens/NotFoundScreen'
 import BottomTabNavigator from './BottomTabNavigator'
