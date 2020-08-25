@@ -42,7 +42,8 @@ Android application for the Spektrum student association with a couple of handy 
 .
 ├── api
 │   ├── calendar.ts
-│   ├── lunch.js
+│   ├── lunch.ts
+│   ├── songArchive.ts
 │   └── spektraklet.ts
 ├── assets
 │   └── images
@@ -54,8 +55,8 @@ Android application for the Spektrum student association with a couple of handy 
 ├── components
 │   └── Themed.tsx
 ├── constants
-│   ├── Layout.ts
-│   └── Theme.ts
+│   ├── Colors.ts
+│   └── Layout.ts
 ├── functions
 │   ├── credentials.json
 │   ├── index.js
@@ -65,7 +66,7 @@ Android application for the Spektrum student association with a couple of handy 
 │   ├── useCachedResources.ts
 │   ├── useFirestore.ts
 │   ├── useStorage.ts
-│   └── useTheme.js
+│   └── useTheme.tsx
 ├── navigation
 │   ├── BottomTabNavigator.tsx
 │   └── index.tsx
@@ -75,13 +76,13 @@ Android application for the Spektrum student association with a couple of handy 
 │   │   ├── CalendarScreen.tsx
 │   │   └── SongArchiveScreen.tsx
 │   ├── Home
-│   │   ├── HomeScreen.jsx
-│   │   └── SettingsScreen.jsx
+│   │   ├── HomeScreen.tsx
+│   │   └── SettingsScreen.tsx
 │   ├── Lunch
 │   │   └── LunchScreen.tsx
 │   ├── Spektraklet
-│   │   ├── PostScreen.jsx
-│   │   └── SpektrakletScreen.jsx
+│   │   ├── PostScreen.tsx
+│   │   └── SpektrakletScreen.tsx
 │   ├── LoadingScreen.tsx
 │   └── NotFoundScreen.tsx
 ├── app.jks
