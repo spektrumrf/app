@@ -25,21 +25,6 @@ export const ThemeColors = {
         light: 'gray',
         dark: 'gray',
         pink: 'gray'
-    },
-    tabIconSelected: {
-        light: primary,
-        dark: primary,
-        pink: primary
-    },
-    iconSize: {
-        light: 34,
-        dark: 34,
-        pink: 34
-    },
-    margin: {
-        light: 15,
-        dark: 15,
-        pink: 15
     }
 }
 
@@ -71,7 +56,7 @@ export const PinkTheme = {
     dark: false,
     colors: {
         primary: '#FF60A5',
-        background: 'white',
+        background: 'pink',
         card: 'pink',
         text: 'black',
         border: 'gray',

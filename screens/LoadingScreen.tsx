@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, ScrollView, RefreshControl } from 'react-native'
+import { ScrollView, RefreshControl } from 'react-native'
 
 import { withTheme } from '../hooks/useTheme'
 import { View } from '../components/Themed'
 
 function LoadingScreen ({ theme }) {
     return (
-        <View style={styles.container}>
+        <View>
             <ScrollView
                 refreshControl={
                     <RefreshControl
@@ -19,11 +19,5 @@ function LoadingScreen ({ theme }) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-})
 
 export default withTheme(LoadingScreen)

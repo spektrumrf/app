@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, FlatList } from 'react-native'
-import { Card, Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
 import { fetchCalendar } from '../../api/calendar'
-import { Text, View } from '../../components/Themed'
+import { Text, View, Card } from '../../components/Themed'
 
 function CalendarScreen ({ theme }) {
     const [calendar, setCalendar] = useState([])
@@ -21,14 +21,13 @@ function CalendarScreen ({ theme }) {
     }, [])
     return (
         loading ? <LoadingScreen/>
-            : <View style={styles.container}>
+            : <View>
                 <FlatList
                     data={calendar}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => (
                         <Card
                             title={item.event}
-                            containerStyle={{ borderRadius: 10, backgroundColor: theme.background }}
                             titleStyle={{
                                 color: theme.text
                             }}
@@ -51,9 +50,6 @@ function CalendarScreen ({ theme }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold'

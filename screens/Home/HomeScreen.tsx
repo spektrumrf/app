@@ -53,14 +53,14 @@ function HomeScreen ({ navigation, theme }) {
                     color={state === name ? theme.primary : theme.text}
                     name={name}
                     type='fontisto'
-                    size={theme.iconSize}
+                    size={34}
                 />
             </TouchableHighlight>
         )
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             <StatusBar
                 style={theme.id === 'dark' ? 'light' : 'dark'}
             />
@@ -98,7 +98,7 @@ function HomeScreen ({ navigation, theme }) {
                         style={styles.logo}
                         source={logos.tint}>
                         <Image
-                            style={{ zIndex: 1, position: 'absolute', ...styles.logo }}
+                            style={styles.logo}
                             source={visit === 'homepage' ? null : logos[theme.id]}
                         />
                     </ImageBackground>
@@ -122,9 +122,6 @@ function HomeScreen ({ navigation, theme }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     settings: {
         alignItems: 'flex-end',
         paddingTop: 15,

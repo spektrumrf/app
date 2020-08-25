@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, FlatList, RefreshControl } from 'react-native'
-import { Card, Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 
 import { fetchSongArchive } from '../../api/songArchive'
 import { withTheme } from '../../hooks/useTheme'
-import { Text, View } from '../../components/Themed'
-import Layout from '../../constants/Layout'
+import { Text, View, Card } from '../../components/Themed'
 import LoadingScreen from '../LoadingScreen'
 
 function SongArchiveScreen ({ theme }) {
@@ -31,7 +30,7 @@ function SongArchiveScreen ({ theme }) {
     }
 
     return (
-        <View style={styles.container}>
+        <View>
             {loading
                 ? <LoadingScreen/>
                 : <FlatList
@@ -46,7 +45,6 @@ function SongArchiveScreen ({ theme }) {
                     renderItem={({ item }) => (
                         <Card
                             title={item.title}
-                            containerStyle={{ backgroundColor: theme.background, ...styles.card }}
                             titleStyle={{ color: theme.text }}
                         >
                             <View style={styles.row}>
@@ -69,19 +67,12 @@ function SongArchiveScreen ({ theme }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold'
     },
     row: {
         flexDirection: 'row'
-    },
-    card: {
-        borderRadius: 10,
-        width: Layout.window.width - 30
     }
 })
 

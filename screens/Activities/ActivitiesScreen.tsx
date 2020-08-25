@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as WebBrowser from 'expo-web-browser'
-import { StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, Alert } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 
 import { useFirestore } from '../../hooks/useFirestore'
@@ -44,17 +44,6 @@ function ActivitiesScreen ({ navigation, theme }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity
-                onPress={() => {
-                    loading
-                        ? Alert.alert('Laddar Sångboken ...', 'Checka din nätuppkoppling')
-                        : WebBrowser.openBrowserAsync(songbook, {
-                            enableBarCollapsing: false,
-                            toolbarColor: theme.background
-                        })
-                }}
-            >
-            </TouchableOpacity>
             <ActivityButton
                 onPress={() => {
                     loading

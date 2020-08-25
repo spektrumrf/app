@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Appearance } from 'react-native-appearance'
 
 import { retrieveData, storeData } from './useStorage'
-import { ThemeColors, DefaultTheme, DarkTheme, PinkTheme } from '../constants/Theme'
+import { ThemeColors, DefaultTheme, DarkTheme, PinkTheme } from '../constants/Colors'
 
 const STORAGE_KEY = 'THEME_ID'
 const ThemeContext = React.createContext(null)
@@ -22,58 +22,62 @@ export function getTheme (mode: string) {
     return Theme
 }
 
+export function getThemeId () {
+    const { themeId } = useContext(ThemeContext)
+    return themeId
+}
+
+export function getNavigatorTheme () {
+    const themeId = getThemeId()
+    if (themeId === 'light') {
+        return DefaultTheme
+    } else if (themeId === 'dark') {
+        return DarkTheme
+    } else if (themeId === 'pink') {
+        return PinkTheme
+    } else if (Appearance.getColorScheme() === 'light') {
+        return DefaultTheme
+    } else {
+        return DarkTheme
+    }
+}
+
 export function ThemeContextProvider ({ children }) {
-    const [themeID, setThemeID] = useState('')
+    const [themeId, setThemeId] = useState('')
 
     useEffect(() => {
         (async () => {
-            const storedThemeID = await retrieveData(STORAGE_KEY)
-            if (storedThemeID) {
-                setThemeID(storedThemeID)
+            const storedThemeId = await retrieveData(STORAGE_KEY)
+            if (storedThemeId) {
+                setThemeId(storedThemeId)
             } else if (Appearance.getColorScheme()) {
-                setThemeID('standard')
+                setThemeId('standard')
             } else {
-                setThemeID('light')
+                setThemeId('light')
             }
         })()
     }, [])
 
     return (
-        <ThemeContext.Provider value={{ themeID, setThemeID }}>
-            {themeID ? children : null}
+        <ThemeContext.Provider value={{ themeId, setThemeId }}>
+            {themeId ? children : null}
         </ThemeContext.Provider>
     )
 }
 
-export function getThemeID () {
-    const { themeID } = useContext(ThemeContext)
-    return themeID
-}
-
-export function getNavigatorTheme () {
-    const themeId = getThemeID()
-    if (themeId === 'light') {
-        return DefaultTheme
-    } else if (themeId === 'dark') {
-        return DarkTheme
-    } else {
-        return PinkTheme
-    }
-}
-
 export function withTheme (Component) {
     return props => {
-        const { themeID, setThemeID } = useContext(ThemeContext)
+        const { themeId, setThemeId } = useContext(ThemeContext)
 
-        function setTheme (themeID: string) {
-            storeData(STORAGE_KEY, themeID)
-            setThemeID(themeID)
+        function setTheme (themeId: string) {
+            storeData(STORAGE_KEY, themeId)
+            setThemeId(themeId)
         }
 
         return (
             <Component
                 {...props}
-                theme={getTheme(themeID)}
+                theme={getTheme(themeId)}
                 setTheme={setTheme}
             />
         )

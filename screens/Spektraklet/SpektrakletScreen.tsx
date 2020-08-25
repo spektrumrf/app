@@ -1,12 +1,11 @@
 
 import React, { useEffect, useState, useRef } from 'react'
-import { StyleSheet, TouchableOpacity, FlatList, RefreshControl } from 'react-native'
+import { TouchableOpacity, FlatList, RefreshControl } from 'react-native'
 import HTML from 'react-native-render-html'
-import { Card } from 'react-native-elements'
 
 import LoadingScreen from '../LoadingScreen'
 import { withTheme } from '../../hooks/useTheme'
-import { SafeAreaView } from '../../components/Themed'
+import { SafeAreaView, Card } from '../../components/Themed'
 import { fetchSpektraklet } from '../../api/spektraklet'
 
 function SpektrakletSceen ({ navigation, theme }) {
@@ -80,7 +79,7 @@ function SpektrakletSceen ({ navigation, theme }) {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             {posts.length > 0 ? (
                 <FlatList
                     refreshControl={<RefreshControl
@@ -133,11 +132,5 @@ function SpektrakletSceen ({ navigation, theme }) {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-})
 
 export default withTheme(SpektrakletSceen)

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, FlatList, RefreshControl } from 'react-native'
-import { Card, Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 
 import { fetchLunch } from '../../api/lunch'
 import { withTheme } from '../../hooks/useTheme'
-import { Text, SafeAreaView, View } from '../../components/Themed'
-import Layout from '../../constants/Layout'
+import { Text, SafeAreaView, View, Card } from '../../components/Themed'
 import LoadingScreen from '../LoadingScreen'
 
 function LunchScreen ({ theme }) {
@@ -99,7 +98,7 @@ function LunchScreen ({ theme }) {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             {loading
                 ? <LoadingScreen/>
                 : <FlatList
@@ -114,7 +113,6 @@ function LunchScreen ({ theme }) {
                     renderItem={({ item }) => (
                         <Card
                             title={item.title}
-                            containerStyle={{ backgroundColor: theme.background, ...styles.card }}
                             titleStyle={{ color: theme.text }}
                         >
                             <View style={styles.row}>
@@ -141,19 +139,12 @@ function LunchScreen ({ theme }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold'
     },
     row: {
         flexDirection: 'row'
-    },
-    card: {
-        borderRadius: 10,
-        width: Layout.window.width - 30
     }
 })
 

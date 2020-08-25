@@ -123,26 +123,24 @@ function PostScreen ({ route, theme }) {
                             />
                         </TouchableHighlight>
                     </View>
-                    <View style={{ alignSelf: 'center' }}>
-                        <HTML
-                            html={content}
-                            baseFontStyle={{ fontSize: 18, color: theme.text }}
-                            tagsStyles={tagsStyles}
-                            imagesMaxWidth={Layout.window.width - 30}
-                            ignoredStyles={['width', 'height', 'video']}
-                            onLinkPress={(evt, href) => WebBrowser.openBrowserAsync(href)}
-                            alterNode = { (node) => {
-                                const name = null
-                                const parent = null
-                                // If the tag is <a> and parent is <figcaption>
-                                if (name === 'a' && getParentsTagsRecursively(parent).indexOf('figcaption') !== -1) {
-                                    // Change fontSize
-                                    node.attribs = { ...(node.attribs || {}), style: 'fontSize: 14;' }
-                                    return node
-                                }
-                            }}
-                        />
-                    </View>
+                    <HTML
+                        html={content}
+                        baseFontStyle={{ fontSize: 18, color: theme.text }}
+                        tagsStyles={tagsStyles}
+                        imagesMaxWidth={Layout.window.width - 30}
+                        ignoredStyles={['width', 'height', 'video']}
+                        onLinkPress={(evt, href) => WebBrowser.openBrowserAsync(href)}
+                        alterNode = { (node) => {
+                            const name = null
+                            const parent = null
+                            // If the tag is <a> and parent is <figcaption>
+                            if (name === 'a' && getParentsTagsRecursively(parent).indexOf('figcaption') !== -1) {
+                                // Change fontSize
+                                node.attribs = { ...(node.attribs || {}), style: 'fontSize: 14;' }
+                                return node
+                            }
+                        }}
+                    />
                 </ScrollView>
             ) : (
                 <LoadingScreen/>
@@ -153,7 +151,6 @@ function PostScreen ({ route, theme }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         paddingLeft: 15,
         paddingRight: 15
     },
