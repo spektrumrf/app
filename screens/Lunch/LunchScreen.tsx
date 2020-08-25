@@ -128,7 +128,7 @@ function LunchScreen ({ theme }) {
                             {
                                 item.menu.length > 1
                                     ? <View>{formatMenu({ menu: item.menu })}</View>
-                                    : <Text>{item.menu.content}</Text>
+                                    : <Text>{item.menu[0].content}</Text>
                             }
                         </Card>
                     )}
