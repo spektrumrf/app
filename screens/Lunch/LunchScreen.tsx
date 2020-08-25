@@ -27,7 +27,7 @@ function LunchScreen ({ theme }) {
     function formatMenu ({ menu }) {
         function FormattedLunch ({ lunch, name, type, bold }) {
             return (
-                <View style={styles.row} key={lunch.id.toString()}>
+                <View style={styles.row}>
                     <Icon
                         style={{ paddingRight: 5 }}
                         color={theme.text}
@@ -90,7 +90,7 @@ function LunchScreen ({ theme }) {
         }
 
         return menu.map((lunch: {type: string, content: string, id: number}) => {
-            return <View style={styles.row} key={lunch.id.toString()}>
+            return <View key={lunch.id.toString()}>
                 <FormattedMenu lunch={lunch}/>
             </View>
         })

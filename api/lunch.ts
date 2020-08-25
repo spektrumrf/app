@@ -80,8 +80,7 @@ async function fetchRestaurant (url: string, name: string): Promise<Lunch> {
                     content: pair[1],
                     id: index
                 }
-            })
-        console.log(menu)    
+            })   
 
         return {
             title: name,
