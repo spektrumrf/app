@@ -9,7 +9,7 @@ import BottomTabNavigator from './BottomTabNavigator'
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
-function Navigation ({ theme }) {
+function Navigation () {
     return (
         <NavigationContainer
             theme={getNavigatorTheme()}>

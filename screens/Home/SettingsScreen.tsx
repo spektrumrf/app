@@ -8,8 +8,10 @@ import { View, Text } from '../../components/Themed'
 
 const REPOSITORY_URL = 'https://github.com/spektrumrf/app'
 
+type Underline = 'underline' | 'none' | 'line-through' | 'underline line-through'
+
 function SettingsScreen ({ theme, setTheme }) {
-    const [underline, setUnderline] = useState('underline')
+    const [underline, setUnderline] = useState<Underline>('underline')
     const [checked, setChecked] = useState(getThemeID())
     return (
         <View style={styles.container}>
@@ -82,7 +84,7 @@ function SettingsScreen ({ theme, setTheme }) {
             <TouchableHighlight
                 activeOpacity={1}
                 underlayColor={theme.background}
-                onShowUnderlay={() => setUnderline(null)}
+                onShowUnderlay={() => setUnderline('none')}
                 onHideUnderlay={() => setUnderline('underline')}
                 onPress={() => { WebBrowser.openBrowserAsync(REPOSITORY_URL) }}
             >

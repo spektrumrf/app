@@ -56,7 +56,7 @@ const fetchRestaurant = async (url: string, name: string, id: number): Promise<L
                 id: id,
                 title: name,
                 date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-                menu: [{type: null, content: 'Meny ur bruk'}]
+                menu: [{ type: null, content: 'Meny ur bruk' }]
             }
         }
 
@@ -97,7 +97,7 @@ const fetchRestaurant = async (url: string, name: string, id: number): Promise<L
             id: id,
             title: name,
             date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-            menu: [{type: null, content: 'Meny ur bruk'}]
+            menu: [{ type: null, content: 'Meny ur bruk' }]
         }
     }
 }

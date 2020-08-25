@@ -66,7 +66,7 @@ function SpektrakletSceen ({ navigation, theme }) {
         }
     }
 
-    const getImage = (item) => {
+    const getImage = ({ item }) => {
         if (item.featured_media) {
             return { uri: item._embedded['wp:featuredmedia'][0].media_details.sizes['post-thumbnail'].source_url }
         } else {
@@ -74,7 +74,7 @@ function SpektrakletSceen ({ navigation, theme }) {
         }
     }
 
-    const decodeHtmlCharCodes = (str) =>
+    const decodeHtmlCharCodes = (str: string) =>
         str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
             String.fromCharCode(charCode))
 
@@ -103,7 +103,7 @@ function SpektrakletSceen ({ navigation, theme }) {
                             titleStyle={{
                                 color: theme.text
                             }}
-                            image={getImage(item)}
+                            image={getImage({ item })}
                         >
                             <TouchableOpacity
                                 onPress={() => {

@@ -5,9 +5,9 @@ import { retrieveData, storeData } from './useStorage'
 import { ThemeColors, DefaultTheme, DarkTheme, PinkTheme } from '../constants/Theme'
 
 const STORAGE_KEY = 'THEME_ID'
-const ThemeContext = React.createContext()
+const ThemeContext = React.createContext(null)
 
-export const getTheme = (mode) => {
+export function getTheme (mode: string) {
     if (mode === 'standard') {
         if (Appearance.getColorScheme()) {
             mode = Appearance.getColorScheme()
@@ -22,8 +22,8 @@ export const getTheme = (mode) => {
     return Theme
 }
 
-export const ThemeContextProvider = ({ children }) => {
-    const [themeID, setThemeID] = useState()
+export function ThemeContextProvider ({ children }) {
+    const [themeID, setThemeID] = useState('')
 
     useEffect(() => {
         (async () => {

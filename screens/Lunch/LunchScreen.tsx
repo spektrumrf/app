@@ -25,8 +25,8 @@ function LunchScreen ({ theme }) {
         })
     }, [refreshing])
 
-    const formatMenu = (menu: any) => {
-        const FormattedLunch = ({lunch, i, name, type}) => {
+    const formatMenu = ({ menu }) => {
+        const FormattedLunch = ({ lunch, i, name, type }) => {
             return (
                 <View style={styles.row} key={i}>
                     <Icon
@@ -37,7 +37,7 @@ function LunchScreen ({ theme }) {
                         type={type}
                         size={18}
                     />
-                    <Text 
+                    <Text
                         style={{ flexShrink: 1, fontWeight: 'bold' }}
                         key={'content'}>
                         {lunch.content}
@@ -48,12 +48,12 @@ function LunchScreen ({ theme }) {
 
         return menu.map((lunch: {type: string, content: string}, i: number) => {
             if (lunch.content === '.') {
-                return
+
             } else if (lunch.type.toLowerCase().includes('tiedoitus')) {
                 return <FormattedLunch
                     lunch={lunch}
                     i={i}
-                    name={'info-outline'}   
+                    name={'info-outline'}
                     type={'materialicons'}
                 />
             } else if (lunch.type.toLowerCase().includes('päivän lounas')) {
@@ -123,7 +123,7 @@ function LunchScreen ({ theme }) {
                             </View>
                             {
                                 item.menu.length > 1
-                                    ? <View>{formatMenu(item.menu)}</View>
+                                    ? <View>{formatMenu({ menu: item.menu })}</View>
                                     : <Text >{item.menu.content}</Text>
                             }
                         </Card>

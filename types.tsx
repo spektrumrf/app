@@ -54,59 +54,59 @@ export type Lunch= {
 };
 
 export type RawSongArchive = {
-  "rss": {
-    "$": {
-      "version": string,
-      "xmlns:atom": string,
-      "xmlns:content": string,
-      "xmlns:dc": string,
-      "xmlns:geo": string,
-      "xmlns:georss": string,
-      "xmlns:sy": string,
+  'rss': {
+    '$': {
+      'version': string,
+      'xmlns:atom': string,
+      'xmlns:content': string,
+      'xmlns:dc': string,
+      'xmlns:geo': string,
+      'xmlns:georss': string,
+      'xmlns:sy': string,
     },
-    "channel": [
+    'channel': [
       {
-        "atom:link": [
+        'atom:link': [
           {
-            "$": {
-              "href": string,
-              "rel": string,
-              "type": string,
+            '$': {
+              'href': string,
+              'rel': string,
+              'type': string,
             },
           },
         ],
-        "description": [
+        'description': [
           string,
         ],
-        "generator": [
+        'generator': [
           string,
         ],
-        "item": [
+        'item': [
           {
-            "content:encoded": [
+            'content:encoded': [
               string,
             ],
-            "dc:creator": [
+            'dc:creator': [
               string,
             ],
-            "description": [
+            'description': [
               string,
             ],
-            "guid": [
+            'guid': [
               {
-                "$": {
-                  "isPermaLink": string,
+                '$': {
+                  'isPermaLink': string,
                 },
-                "_": string,
+                '_': string,
               },
             ],
-            "link": [
+            'link': [
               string,
             ],
-            "pubDate": [
+            'pubDate': [
               string,
             ],
-            "title": [
+            'title': [
               string,
             ],
           },
@@ -117,38 +117,38 @@ export type RawSongArchive = {
 };
 
 export type RawLunch = {
-  "rss": {
-    "$": {
-      "version": string,
-      "xmlns:blogChannel": string,
+  'rss': {
+    '$': {
+      'version': string,
+      'xmlns:blogChannel': string,
     },
-    "channel": [
+    'channel': [
       {
-        "description": [
+        'description': [
           string,
         ],
-        "item": [
+        'item': [
           {
-            "description": [
+            'description': [
               string,
             ],
-            "guid": [
+            'guid': [
               {
-                "$": {
-                  "isPermaLink": string,
+                '$': {
+                  'isPermaLink': string,
                 },
-                "_": string,
+                '_': string,
               },
             ],
-            "title": [
+            'title': [
               string,
             ],
           },
         ],
-        "link": [
+        'link': [
           string,
         ],
-        "title": [
+        'title': [
           string,
         ],
       },

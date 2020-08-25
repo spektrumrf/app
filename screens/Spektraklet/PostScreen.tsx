@@ -13,13 +13,13 @@ import { View, Text } from '../../components/Themed'
 import { useFirestore } from '../../hooks/useFirestore'
 import { fetchSpektraklet } from '../../api/spektraklet'
 
-const onShare = async (title, url) => {
+const onShare = async (title: string, url: string) => {
     Share.share({
         message: `${title}\n#spektraklet\n\n${url}`
     })
 }
 
-const decodeHtmlCharCodes = (str) =>
+const decodeHtmlCharCodes = (str: string) =>
     str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
         String.fromCharCode(charCode))
 
@@ -122,25 +122,26 @@ function PostScreen ({ route, theme }) {
                             />
                         </TouchableHighlight>
                     </View>
-                    <HTML
-                        style={{ alignSelf: 'center' }}
-                        html={content}
-                        baseFontStyle={{ fontSize: 18, color: theme.text }}
-                        tagsStyles={tagsStyles}
-                        imagesMaxWidth={Layout.window.width - 30}
-                        ignoredStyles={['width', 'height', 'video']}
-                        onLinkPress={(evt, href) => WebBrowser.openBrowserAsync(href)}
-                        alterNode = { (node) => {
-                            const { name, parent } = node
-                            // If the tag is <a> and parent is <figcaption>
-                            if (name === 'a' && getParentsTagsRecursively(parent).indexOf('figcaption') !== -1) {
-                                // Change fontSize
-                                node.attribs = { ...(node.attribs || {}), style: 'fontSize: 14;' }
-                                return node
-                            }
-                        }
-                        }
-                    />
+                    <View style={{ alignSelf: 'center' }}>
+                        <HTML
+                            html={content}
+                            baseFontStyle={{ fontSize: 18, color: theme.text }}
+                            tagsStyles={tagsStyles}
+                            imagesMaxWidth={Layout.window.width - 30}
+                            ignoredStyles={['width', 'height', 'video']}
+                            onLinkPress={(evt, href) => WebBrowser.openBrowserAsync(href)}
+                            alterNode = { (node) => {
+                                const name = null
+                                const parent = null
+                                // If the tag is <a> and parent is <figcaption>
+                                if (name === 'a' && getParentsTagsRecursively(parent).indexOf('figcaption') !== -1) {
+                                    // Change fontSize
+                                    node.attribs = { ...(node.attribs || {}), style: 'fontSize: 14;' }
+                                    return node
+                                }
+                            }}
+                        />
+                    </View>
                 </ScrollView>
             ) : (
                 <LoadingScreen/>
