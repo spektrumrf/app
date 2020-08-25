@@ -25,9 +25,10 @@ function SongArchiveScreen ({ theme }) {
         })
     }, [refreshing])
 
-    const decodeHtmlCharCodes = (str: string) =>
-        str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
+    function decodeHtmlCharCodes (str: string) {
+        return str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
             String.fromCharCode(charCode))
+    }
 
     return (
         <View style={styles.container}>

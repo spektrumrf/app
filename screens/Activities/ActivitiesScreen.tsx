@@ -23,7 +23,7 @@ function ActivitiesScreen ({ navigation, theme }) {
         })
     }, [])
 
-    const ActivityButton = ({ onPress, title, name }) => {
+    function ActivityButton ({ onPress, title, name }) {
         return (
             <Button
                 onPress={onPress}

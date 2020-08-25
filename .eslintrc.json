@@ -25,6 +25,7 @@
         "quotes": ["error", "single"],
         "jsx-quotes": ["error", "prefer-single"],
         "quote-props": ["error", "consistent"],
+        "func-style": ["error", "declaration"],
         "no-return-assign": 0,
         "react/prop-types": 0,
         "react/display-name": 0,

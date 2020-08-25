@@ -5,7 +5,7 @@ const OAuth2 = google.auth.OAuth2
 
 const googleCredentials = require('./credentials.json')
 
-const listEvents = (calendarId, auth) => {
+function listEvents (calendarId, auth) {
     return new Promise((resolve, reject) => {
         calendar.events.list({
             auth: auth,

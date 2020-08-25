@@ -13,15 +13,16 @@ import { View, Text } from '../../components/Themed'
 import { useFirestore } from '../../hooks/useFirestore'
 import { fetchSpektraklet } from '../../api/spektraklet'
 
-const onShare = async (title: string, url: string) => {
+async function onShare (title: string, url: string) {
     Share.share({
         message: `${title}\n#spektraklet\n\n${url}`
     })
 }
 
-const decodeHtmlCharCodes = (str: string) =>
-    str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
+function decodeHtmlCharCodes (str: string) {
+    return str.replace(/(&#(\d+);)/g, (match, capture, charCode) =>
         String.fromCharCode(charCode))
+}
 
 function PostScreen ({ route, theme }) {
     const { id } = route.params

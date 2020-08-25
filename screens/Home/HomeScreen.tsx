@@ -34,7 +34,7 @@ function HomeScreen ({ navigation, theme }) {
         tint: require('../../assets/images/logo-pink.png')
     }
 
-    const SocialIcon = ({ name }) => {
+    function SocialIcon ({ name }) {
         const [state, setState] = useState('')
 
         return (

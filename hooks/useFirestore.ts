@@ -3,7 +3,7 @@ import 'firebase/firestore'
 
 import env from '../env.json'
 
-export const useFirestore = () => {
+export function useFirestore () {
     if (!firebase.apps.length) {
         const firebaseConfig = {
             projectId: env.firebase.projectId,

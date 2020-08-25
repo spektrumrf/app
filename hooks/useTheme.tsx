@@ -65,7 +65,7 @@ export function withTheme (Component) {
     return props => {
         const { themeID, setThemeID } = useContext(ThemeContext)
 
-        const setTheme = themeID => {
+        function setTheme (themeID: string) {
             storeData(STORAGE_KEY, themeID)
             setThemeID(themeID)
         }

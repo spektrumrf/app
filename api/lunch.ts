@@ -32,7 +32,7 @@ const allergens = {
     'pähkinää': 'nötter'
 }
 
-const fetchRestaurant = async (url: string, name: string, id: number): Promise<Lunch> => {
+async function fetchRestaurant (url: string, name: string, id: number): Promise<Lunch> {
     try {
         const response = await fetch(url, {
             method: 'get'
@@ -102,7 +102,7 @@ const fetchRestaurant = async (url: string, name: string, id: number): Promise<L
     }
 }
 
-export const fetchLunch = async () => {
+export async function fetchLunch () {
     const lunch = await Promise.all([
         fetchRestaurant(CHEMICUM_URL, 'Chemicum', 1),
         fetchRestaurant(EXACTUM_URL, 'Exactum', 2),
