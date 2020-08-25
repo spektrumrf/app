@@ -25,11 +25,15 @@ function LunchScreen ({ theme }) {
         })
     }, [refreshing])
 
-    const formatFood = (food: any) => {
-        return food.map((x, i) => {
+    const formatLunch = (lunch: any) => {
+        const lunchTypes = ['päivän lounas', 'makeasti', 'vegaani', 'erikoinen']
+
+        return lunch.map((x, i) => {
             return <View style={styles.row} key={i}>{
                 x.map((y, j) => {
-                    if (y.toLowerCase().includes('tiedoitus')) {
+                    if (x[1] == '.') {
+                        return
+                    } else if (y.toLowerCase().includes('tiedoitus')) {
                         return <Icon
                             key={j}
                             style={{ paddingRight: 5 }}
@@ -65,9 +69,18 @@ function LunchScreen ({ theme }) {
                             type='entypo'
                             size={18}
                         />
+                    } else if (y.toLowerCase().includes('erikoinen')) {
+                        return <Icon
+                            key={j}
+                            style={{ paddingRight: 5 }}
+                            color={theme.text}
+                            name='credit'
+                            type='entypo'
+                            size={18}
+                        />
                     } else if (y.toLowerCase().includes('allergeenit')) {
                         return <Text style={{ paddingRight: 24 }} key={j}>{''}</Text>
-                    } else if (x[0].toLowerCase().includes('päivän lounas') || x[0].toLowerCase().includes('makeasti') || x[0].toLowerCase().includes('vegaani')) {
+                    } else if (lunchTypes.some(lunchType => x[0].toLowerCase().includes(lunchType))) {
                         return <Text style={{ flexShrink: 1, fontWeight: 'bold' }} key={j}>{y}</Text>
                     } else {
                         return <Text style={{ flexShrink: 1 }} key={j}>{y}</Text>
@@ -108,7 +121,7 @@ function LunchScreen ({ theme }) {
                             </View>
                             {
                                 item.food.length > 1
-                                    ? <View>{formatFood(item.food)}</View>
+                                    ? <View>{formatLunch(item.food)}</View>
                                     : <Text >{item.food}</Text>
                             }
                         </Card>
@@ -121,9 +134,7 @@ function LunchScreen ({ theme }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: 1
     },
     title: {
         fontSize: 20,

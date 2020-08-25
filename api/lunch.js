@@ -97,23 +97,11 @@ const fetchRestaurant = async (url, name, id) => {
 
 export const fetchLunch = async () => {
     const lunch = await Promise.all([
-        fetchRestaurant(KAIVOPIHA_URL, 'Kaivopiha', 1),
-        fetchRestaurant(CHEMICUM_URL, 'Chemicum', 2),
-        fetchRestaurant(EXACTUM_URL, 'Exactum', 3),
-        fetchRestaurant(CHEMICUM_EMPLOYEES_URL, 'Chemicum Personal', 4),
-        fetchRestaurant(PORTHANIA_URL, 'Porthania', 5)
+        fetchRestaurant(CHEMICUM_URL, 'Chemicum', 1),
+        fetchRestaurant(EXACTUM_URL, 'Exactum', 2),
+        fetchRestaurant(KAIVOPIHA_URL, 'Kaivopiha', 3),
+        fetchRestaurant(PORTHANIA_URL, 'Porthania', 4),
+        fetchRestaurant(CHEMICUM_EMPLOYEES_URL, 'Chemicum Personal', 5)
     ])
     return lunch
-}
-
-export const fetchLunchNotification = async () => {
-    const lunch = await fetchRestaurant(KAIVOPIHA_URL, 'Kaivopiha', 1)
-    if (lunch.food.length > 1) {
-        return lunch.food
-            .filter(x => x[0].toLowerCase().includes('päivän lounas'))
-            .map(x => x[1])
-            .join('\n')
-    } else {
-        return ['Meny ur bruk']
-    }
 }
