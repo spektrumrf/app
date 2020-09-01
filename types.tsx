@@ -49,7 +49,7 @@ export type Lunch= {
   menu: {
     type: string;
     content: string;
-    id: number;
+    id: string;
   }[];
 };
 

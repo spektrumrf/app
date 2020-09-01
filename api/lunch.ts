@@ -1,40 +1,27 @@
 import { parseString } from 'react-native-xml2js'
 import { Lunch, RawLunch } from '../types'
+import * as constants from '../constants/Lunch'
 import moment from 'moment'
 
-const KAIVOPIHA_URL = 'https://messi.hyyravintolat.fi/rss/sve/9'
-const CHEMICUM_URL = 'https://messi.hyyravintolat.fi/rss/sve/10'
-const EXACTUM_URL = 'https://messi.hyyravintolat.fi/rss/sve/11'
-const PORTHANIA_URL = 'https://messi.hyyravintolat.fi/rss/sve/39'
-const CHEMICUM_EMPLOYEES_URL = 'https://messi.hyyravintolat.fi/rss/sve/41'
-
-const days = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag']
-
-const allergens = {
-    'soijaa': 'soja',
-    'valkosipulia': 'vitlök',
-    'Vastuullisesti kalastettua': 'hållbart fiske',
-    'Ilmastovalinta': 'miljöval',
-    'palkokasveja': 'baljväxter',
-    'gluteenia': 'gluten',
-    'kalaa': 'fisk',
-    'sinappia': 'senap',
-    'Sisältää luomua': 'innehåller ekologiskt',
-    'Sisältää Reilun kaupan tuotteita': 'innehåller fair trade varor',
-    'seesaminsiemeniä': 'sesamfrön',
-    'maapähkinää': 'jordnötter',
-    'maitoa': 'mjölk',
-    'kananmunaa': 'ägg',
-    'selleriä': 'selleri',
-    'sinapinsiemeniä': 'senapsfrön',
-    'pyydä G': 'be om G',
-    'siemeniä': 'frön',
-    'pähkinää': 'nötter'
+function formatType(type: string): string {
+    if (type.includes('vegaani')) {
+        return 'vegan'
+    } else if (type.includes('tiedoitus')) {
+        return 'info'
+    } else if (type.includes('makeasti')) {
+        return 'dessert'
+    } else if (type.includes('erikoinen')) {
+        return 'special'
+    } else if (type.includes('allergeenit')) {
+        return 'allergens'
+    } else {
+        return 'lunch'
+    }
 }
 
-async function fetchRestaurant (url: string, name: string): Promise<Lunch> {
+async function fetchRestaurant (name: string, id: number): Promise<Lunch> {
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`https://messi.hyyravintolat.fi/rss/sve/${id}`, {
             method: 'get'
         })
         const xml = await response.text()
@@ -51,22 +38,22 @@ async function fetchRestaurant (url: string, name: string): Promise<Lunch> {
         let day = new Date().getDay()
         if (day === 0) day = 7
 
-        if (!parsed) {
+        if (!parsed || day === 6 || day === 7) {
             return {
                 title: name,
-                date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-                menu: [{ type: null, content: 'Meny ur bruk', id: 0 }]
+                date: `${constants.days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
+                menu: [{ type: 'info', content: 'Meny ur bruk', id: `${name}: 0` }]
             }
         }
 
         const date = parsed.rss.channel[0].item[day - 1].title[0]
-        const menu = parsed.rss.channel[0].item[day - 1].description[0]
+        let menu = parsed.rss.channel[0].item[day - 1].description[0]
             .split('. ')
             .filter(item => item)
             .map(item => {
                 if (item.includes('Allergeenit:')) {
-                    for (const key in allergens) {
-                        item = item.replace(key, allergens[key])
+                    for (const key in constants.allergens) {
+                        item = item.replace(key, constants.allergens[key])
                     }
                     return item
                 } else {
@@ -74,13 +61,25 @@ async function fetchRestaurant (url: string, name: string): Promise<Lunch> {
                 }
             })
             .map(item => item.split(': '))
+            .filter(item => item[1] !== '.')
             .map((pair, index) => {
                 return {
-                    type: pair[0],
+                    type: formatType(pair[0].toLowerCase()),
                     content: pair[1],
-                    id: index
+                    id: `${name}: ${index}`
                 }
-            })   
+            })
+
+        let index = 0
+        while (index < menu.length - 1) {
+            if (menu[index].type === 'lunch' && menu[index + 1].type === 'allergens') {
+                if (menu[index + 1].content.split(', ').includes('VE')) {
+                    menu[index].type = 'vegan'
+                }
+            }
+            index++
+        }    
+        
 
         return {
             title: name,
@@ -94,19 +93,19 @@ async function fetchRestaurant (url: string, name: string): Promise<Lunch> {
         console.error(error)
         return {
             title: name,
-            date: `${days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-            menu: [{ type: null, content: 'Meny ur bruk', id: 0 }]
+            date: `${constants.days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
+            menu: [{ type: 'info', content: 'Meny ur bruk', id: `${name}: 0` }]
         }
     }
 }
 
 export async function fetchLunch () {
     const lunch = await Promise.all([
-        fetchRestaurant(CHEMICUM_URL, 'Chemicum', 1),
-        fetchRestaurant(EXACTUM_URL, 'Exactum', 2),
-        fetchRestaurant(KAIVOPIHA_URL, 'Kaivopiha', 3),
-        fetchRestaurant(PORTHANIA_URL, 'Porthania', 4),
-        fetchRestaurant(CHEMICUM_EMPLOYEES_URL, 'Chemicum Personal', 5)
+        fetchRestaurant('Chemicum', 10),
+        fetchRestaurant('Physicum', 12),
+        fetchRestaurant('Exactum', 11),
+        fetchRestaurant('Kaivopiha', 9),
+        fetchRestaurant('Porthania', 39)
     ])
     return lunch
 }

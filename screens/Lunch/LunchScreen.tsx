@@ -45,52 +45,51 @@ function LunchScreen ({ theme }) {
         }
 
         function FormattedMenu ({ lunch }) {
-            if (lunch.content === '.') {
-                return null
-            } else if (lunch.type.toLowerCase().includes('tiedoitus')) {
-                return <FormattedLunch
-                    lunch={lunch}
-                    name={'info-outline'}
-                    type={'materialicons'}
-                    bold={false}
-                />
-            } else if (lunch.type.toLowerCase().includes('päivän lounas')) {
-                return <FormattedLunch
-                    lunch={lunch}
-                    name={'restaurant-menu'}
-                    type={'ionicons'}
-                    bold={true}
-                />
-            } else if (lunch.type.toLowerCase().includes('makeasti')) {
-                return <FormattedLunch
-                    lunch={lunch}
-                    name={'cupcake'}
-                    type={'material-community'}
-                    bold={true}
-                />
-            } else if (lunch.type.toLowerCase().includes('vegaani')) {
-                return <FormattedLunch
-                    lunch={lunch}
-                    name={'leaf'}
-                    type={'entypo'}
-                    bold={true}
-                />
-            } else if (lunch.type.toLowerCase().includes('erikoinen')) {
-                return <FormattedLunch
-                    lunch={lunch}
-                    name={'credit'}
-                    type={'entypo'}
-                    bold={true}
-                />
-            } else if (lunch.type.toLowerCase().includes('allergeenit')) {
-                return <Text style={{ paddingLeft: 24 }}>
-                    {lunch.content}
-                </Text>
+            switch (lunch.type) {
+                case 'info':
+                    return <FormattedLunch
+                        lunch={lunch}
+                        name={'info-outline'}
+                        type={'materialicons'}
+                        bold={false}
+                    />
+                case 'lunch':
+                    return <FormattedLunch
+                        lunch={lunch}
+                        name={'restaurant-menu'}
+                        type={'ionicons'}
+                        bold={true}
+                    />
+                case 'dessert':
+                    return <FormattedLunch
+                        lunch={lunch}
+                        name={'cupcake'}
+                        type={'material-community'}
+                        bold={true}
+                    />
+                case 'vegan':
+                    return <FormattedLunch
+                        lunch={lunch}
+                        name={'leaf'}
+                        type={'entypo'}
+                        bold={true}
+                    />
+                case 'special':
+                    return <FormattedLunch
+                        lunch={lunch}
+                        name={'credit'}
+                        type={'entypo'}
+                        bold={true}
+                    />
+                case 'allergens':
+                    return <Text style={{ paddingLeft: 24 }}>
+                        {lunch.content}
+                    </Text>
             }
         }
 
         return menu.map((lunch: {type: string, content: string, id: number}) => {
-            return <View key={lunch.id.toString()}>
+            return <View key={lunch.id}>
                 <FormattedMenu lunch={lunch}/>
             </View>
         })
@@ -108,7 +107,7 @@ function LunchScreen ({ theme }) {
                         onRefresh={() => setRefreshing(true)} />
                     }
                     data={lunch}
-                    keyExtractor={item => item.name}
+                    keyExtractor={item => item.title}
                     renderItem={({ item }) => (
                         <Card
                             title={item.title}
@@ -124,11 +123,9 @@ function LunchScreen ({ theme }) {
                                 />
                                 <Text>{item.date}</Text>
                             </View>
-                            {
-                                item.menu.length > 1
-                                    ? <View>{formatMenu({ menu: item.menu })}</View>
-                                    : <Text>{item.menu[0].content}</Text>
-                            }
+                            <View>
+                                {formatMenu({ menu: item.menu })}
+                            </View>
                         </Card>
                     )}
                 />
