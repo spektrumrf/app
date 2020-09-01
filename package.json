@@ -4,6 +4,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "build:android": "expo build:android -t app-bundle",
+    "upload:android": "expo upload:android",
     "eject": "expo eject",
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npx eslint . --fix --ext .js,.jsx,.ts,.tsx"
