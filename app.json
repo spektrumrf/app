@@ -2,7 +2,7 @@
   "expo": {
     "name": "Spektrum",
     "slug": "app",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "spektrum",
@@ -27,7 +27,7 @@
     "android": {
       "package": "fi.spektrum.app",
       "permissions": [],
-      "versionCode": 2, 
+      "versionCode": 3, 
       "adaptiveIcon": {
         "backgroundColor": "#FF60A5",
         "foregroundImage": "./assets/launcher.png"
