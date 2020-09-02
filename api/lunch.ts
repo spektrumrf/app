@@ -3,7 +3,7 @@ import { Lunch, RawLunch } from '../types'
 import * as constants from '../constants/Lunch'
 import moment from 'moment'
 
-function formatType(type: string): string {
+function formatType (type: string): string {
     if (type.includes('vegaani')) {
         return 'vegan'
     } else if (type.includes('tiedoitus')) {
@@ -47,7 +47,7 @@ async function fetchRestaurant (name: string, id: number): Promise<Lunch> {
         }
 
         const date = parsed.rss.channel[0].item[day - 1].title[0]
-        let menu = parsed.rss.channel[0].item[day - 1].description[0]
+        const menu = parsed.rss.channel[0].item[day - 1].description[0]
             .split('. ')
             .filter(item => item)
             .map(item => {
@@ -78,8 +78,7 @@ async function fetchRestaurant (name: string, id: number): Promise<Lunch> {
                 }
             }
             index++
-        }    
-        
+        }
 
         return {
             title: name,

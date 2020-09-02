@@ -46,45 +46,45 @@ function LunchScreen ({ theme }) {
 
         function FormattedMenu ({ lunch }) {
             switch (lunch.type) {
-                case 'info':
-                    return <FormattedLunch
-                        lunch={lunch}
-                        name={'info-outline'}
-                        type={'materialicons'}
-                        bold={false}
-                    />
-                case 'lunch':
-                    return <FormattedLunch
-                        lunch={lunch}
-                        name={'restaurant-menu'}
-                        type={'ionicons'}
-                        bold={true}
-                    />
-                case 'dessert':
-                    return <FormattedLunch
-                        lunch={lunch}
-                        name={'cupcake'}
-                        type={'material-community'}
-                        bold={true}
-                    />
-                case 'vegan':
-                    return <FormattedLunch
-                        lunch={lunch}
-                        name={'leaf'}
-                        type={'entypo'}
-                        bold={true}
-                    />
-                case 'special':
-                    return <FormattedLunch
-                        lunch={lunch}
-                        name={'credit'}
-                        type={'entypo'}
-                        bold={true}
-                    />
-                case 'allergens':
-                    return <Text style={{ paddingLeft: 24 }}>
-                        {lunch.content}
-                    </Text>
+            case 'info':
+                return <FormattedLunch
+                    lunch={lunch}
+                    name={'info-outline'}
+                    type={'materialicons'}
+                    bold={false}
+                />
+            case 'lunch':
+                return <FormattedLunch
+                    lunch={lunch}
+                    name={'restaurant-menu'}
+                    type={'ionicons'}
+                    bold={true}
+                />
+            case 'dessert':
+                return <FormattedLunch
+                    lunch={lunch}
+                    name={'cupcake'}
+                    type={'material-community'}
+                    bold={true}
+                />
+            case 'vegan':
+                return <FormattedLunch
+                    lunch={lunch}
+                    name={'leaf'}
+                    type={'entypo'}
+                    bold={true}
+                />
+            case 'special':
+                return <FormattedLunch
+                    lunch={lunch}
+                    name={'credit'}
+                    type={'entypo'}
+                    bold={true}
+                />
+            case 'allergens':
+                return <Text style={{ paddingLeft: 24 }}>
+                    {lunch.content}
+                </Text>
             }
         }
 

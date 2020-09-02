@@ -21,8 +21,8 @@ const allergens = {
     'kananmunaa': 'ägg',
     'siemeniä': 'frön',
     'maitoa': 'mjölk',
-    'soijaa': 'soja', 
-    'kalaa': 'fisk',
+    'soijaa': 'soja',
+    'kalaa': 'fisk'
 }
 
 export {
