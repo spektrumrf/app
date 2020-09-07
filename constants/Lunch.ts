@@ -13,14 +13,17 @@ const allergens = {
     'maapähkinää': 'jordnötter',
     'sulfiitteja': 'sulfiter',
     'valkosipulia': 'vitlök',
+    'Pyydettäessä': 'be om',
+    'pyydettäessä': 'be om',
     'gluteenia': 'gluten',
     'selleriä': 'selleri',
-    'pyydä G': 'be om G',
     'pähkinää': 'nötter',
     'sinappia': 'senap',
     'kananmunaa': 'ägg',
     'siemeniä': 'frön',
     'maitoa': 'mjölk',
+    'Pyydä': 'be om',
+    'pyydä': 'be om',
     'soijaa': 'soja',
     'kalaa': 'fisk'
 }
