@@ -130,9 +130,8 @@ function PostScreen ({ route, theme }) {
                         imagesMaxWidth={Layout.window.width - 30}
                         ignoredStyles={['width', 'height', 'video']}
                         onLinkPress={(evt, href) => WebBrowser.openBrowserAsync(href)}
-                        alterNode = { (node) => {
-                            const name = null
-                            const parent = null
+                        alterNode = { (node: any) => {
+                            const { name, parent } = node
                             // If the tag is <a> and parent is <figcaption>
                             if (name === 'a' && getParentsTagsRecursively(parent).indexOf('figcaption') !== -1) {
                                 // Change fontSize
