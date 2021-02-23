@@ -1,7 +1,7 @@
 
 # Spektrum App
 
-[![](https://img.shields.io/badge/Version-2.2-blue)](https://github.com/spektrumrf/app/releases)
+[![](https://img.shields.io/badge/Version-2.2.1-blue)](https://github.com/spektrumrf/app/releases)
 [![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [<img src="https://github.com/spektrumrf/assets/raw/master/images/playstore/ic-launcher.png" width="100">](https://play.google.com/store/apps/details?id=fi.spektrum.app)
