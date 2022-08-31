@@ -39,7 +39,8 @@
     "react-native-screens": "~2.15.2",
     "react-native-webview": "11.0.0",
     "react-native-xml2js": "^1.0.3",
-    "sharp": "^0.24.1"
+    "sharp": "^0.24.1",
+    "expo-updates": "~0.4.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
