@@ -49,6 +49,15 @@ function SongArchiveScreen ({ theme }) {
                         >
                             <View style={styles.row}>
                                 <Icon
+                                    color={theme.text}
+                                    name='person'
+                                    type='ionicons'
+                                    size={18}
+                                />
+                                <Text style={{ color: theme.text, ...styles.info }} >
+                                    {item.author}
+                                </Text>
+                                <Icon
                                     style={{ paddingRight: 5 }}
                                     color={theme.text}
                                     name='date-range'
@@ -73,6 +82,9 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row'
+    },
+    info: {
+        marginRight: 15
     }
 })
 

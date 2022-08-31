@@ -20,8 +20,9 @@ export async function fetchSongArchive (): Promise<SongArchive> {
         return parsed.rss.channel[0].item.map(song => {
             return {
                 id: song.link[0],
-                title: song['dc:creator'][0],
-                description: song.description[0],
+                title: song.description[0].split('\n')[0],
+                author: song['dc:creator'][0],
+                description: song.description[0].split('\n').slice(1).join('\n'),
                 date: moment(song.pubDate[0]).format('YYYY-MM-DD')
             }
         })
