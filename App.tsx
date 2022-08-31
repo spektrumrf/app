@@ -6,7 +6,6 @@ import useCachedResources from './hooks/useCachedResources'
 import Navigation from './navigation'
 
 export default function App () {
-
     // SplashScreen while loading assets
     const isLoadingComplete = useCachedResources()
 

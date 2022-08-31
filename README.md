@@ -24,6 +24,14 @@ Android application for the Spektrum student association with a couple of handy 
 
 ### App
 
+#### Requirements
+
+Node 12
+
+```
+npm install -g expo-cli
+```
+
 #### Install dependencies
 
 ```

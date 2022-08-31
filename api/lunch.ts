@@ -1,5 +1,4 @@
-import { parseString } from 'react-native-xml2js'
-import { Lunch, RawLunch } from '../types'
+import { Lunch } from '../types'
 import * as constants from '../constants/Lunch'
 import moment from 'moment'
 
@@ -19,70 +18,49 @@ function formatType (type: string): string {
     }
 }
 
+function translateAllergens (allergens: string): string {
+    for (const key in constants.allergens) {
+        allergens = allergens.replace(key, constants.allergens[key])
+    }
+    return allergens
+}
+
 async function fetchRestaurant (name: string, id: number): Promise<Lunch> {
     try {
-        const response = await fetch(`https://messi.hyyravintolat.fi/rss/sve/${id}`, {
+        const response = await fetch('https://unicafe.fi/wp-json/swiss/v1/restaurants/?lang=sv', {
             method: 'get'
         })
-        const xml = await response.text()
-        const parsed = await new Promise<RawLunch>(resolve => {
-            parseString(xml, (err: string, result: RawLunch) => {
-                if (err) {
-                    resolve(null)
-                } else {
-                    resolve(result)
-                }
-            })
-        })
+        const restaurants = await response.json()
+        const restaurant = restaurants.filter(r => r.id === id)[0]
 
-        let day = new Date().getDay()
-        if (day === 0) day = 7
+        const date = moment(new Date()).format('DD.MM')
 
-        if (!parsed || day === 6 || day === 7) {
+        const [todays] = restaurant.menuData.menus.filter(item => item.date.includes(date))
+        const menu = todays.data.map((item, index) => {
             return {
-                title: name,
-                date: `${constants.days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-                menu: [{ type: 'info', content: 'Meny ur bruk', id: `${name}: 0` }]
+                type: formatType(item.price.name.toLowerCase()),
+                content: item.name,
+                allergens: [
+                    translateAllergens(item.meta['0'].join(', ')),
+                    translateAllergens(item.meta['1'].join(', ')),
+                    translateAllergens(item.meta['2'].join(', '))
+                ],
+                id: `${name}: ${index}`
             }
-        }
+        })
+            .filter(item => item.type !== 'info' && item.content !== '.')
 
-        const date = parsed.rss.channel[0].item[day - 1].title[0]
-        const menu = parsed.rss.channel[0].item[day - 1].description[0]
-            .split('. ')
-            .filter(item => item)
-            .map(item => {
-                if (item.includes('Allergeenit:')) {
-                    for (const key in constants.allergens) {
-                        item = item.replace(key, constants.allergens[key])
-                    }
-                    return item
-                } else {
-                    return item
-                }
-            })
-            .map(item => item.split(': '))
-            .filter(item => item[1] !== '.')
-            .map((pair, index) => {
-                return {
-                    type: formatType(pair[0].toLowerCase()),
-                    content: pair[1],
-                    id: `${name}: ${index}`
-                }
-            })
-
-        let index = 0
-        while (index < menu.length - 1) {
-            if (menu[index].type === 'lunch' && menu[index + 1].type === 'allergens') {
-                if (menu[index + 1].content.split(', ').includes('VE')) {
-                    menu[index].type = 'vegan'
-                }
-            }
-            index++
+        const numDay = moment().weekday()
+        const label = (numDay === 6 || numDay === 7) ? 'La–Su' : 'Ma–Pe'
+        let [visitingInfo] = restaurant.menuData.visitingHours.lounas.items.filter(item => item.label === label)
+        if (!visitingInfo) {
+            [visitingInfo] = restaurant.menuData.visitingHours.lounas.items.filter(item => item.label === 'Ma–Su')
         }
 
         return {
             title: name,
-            date: date,
+            date: todays.date,
+            open: visitingInfo.closedException ? 'Stängt' : visitingInfo.hours,
             menu: menu
         }
     } catch (error) {
@@ -92,19 +70,20 @@ async function fetchRestaurant (name: string, id: number): Promise<Lunch> {
         console.error(error)
         return {
             title: name,
-            date: `${constants.days[day - 1]} ${moment(new Date()).format('DD.MM.YYYY')}`,
-            menu: [{ type: 'info', content: 'Meny ur bruk', id: `${name}: 0` }]
+            date: `${constants.days[day - 1]} ${moment(new Date()).format('DD.MM')}`,
+            open: 'Stängt',
+            menu: [{ type: 'info', content: 'Meny ur bruk', allergens: [''], id: `${name}: 0` }]
         }
     }
 }
 
 export async function fetchLunch () {
     const lunch = await Promise.all([
-        fetchRestaurant('Chemicum', 10),
-        fetchRestaurant('Physicum', 12),
-        fetchRestaurant('Exactum', 11),
-        fetchRestaurant('Kaivopiha', 9),
-        fetchRestaurant('Porthania', 39)
+        fetchRestaurant('Chemicum', 1354),
+        fetchRestaurant('Physicum', 1363),
+        fetchRestaurant('Exactum', 1356),
+        fetchRestaurant('Kaivopiha', 2543),
+        fetchRestaurant('Porthania', 1364)
     ])
     return lunch
 }

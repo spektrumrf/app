@@ -46,9 +46,11 @@ export type SongArchive = {
 export type Lunch= {
   title: string;
   date: string;
+  open: string;
   menu: {
     type: string;
     content: string;
+    allergens: [string];
     id: string;
   }[];
 };

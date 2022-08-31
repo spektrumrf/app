@@ -27,19 +27,24 @@ function LunchScreen ({ theme }) {
     function formatMenu ({ menu }) {
         function FormattedLunch ({ lunch, name, type, bold }) {
             return (
-                <View style={styles.row}>
-                    <Icon
-                        style={{ paddingRight: 5 }}
-                        color={theme.text}
-                        name={name}
-                        type={type}
-                        size={18}
-                    />
-                    <Text
-                        style={{ flexShrink: 1, fontWeight: bold ? 'bold' : 'normal' }}
-                    >
-                        {lunch.content}
-                    </Text>
+                <View>
+                    <View style={styles.row}>
+                        <Icon
+                            style={{ paddingRight: 5 }}
+                            color={theme.text}
+                            name={name}
+                            type={type}
+                            size={18}
+                        />
+                        <Text
+                            style={{ flexShrink: 1, fontWeight: bold ? 'bold' : 'normal' }}
+                        >
+                            {lunch.content}
+                        </Text>
+                    </View>
+                    {lunch.allergens[0] ? <Text style={{ paddingLeft: 24 }}>{lunch.allergens[0]}</Text> : null}
+                    {lunch.allergens[1] ? <Text style={{ paddingLeft: 24 }}>{lunch.allergens[1]}</Text> : null}
+                    {lunch.allergens[2] ? <Text style={{ paddingLeft: 24 }}>{lunch.allergens[2]}</Text> : null}
                 </View>
             )
         }
@@ -117,11 +122,21 @@ function LunchScreen ({ theme }) {
                                 <Icon
                                     style={{ paddingRight: 5 }}
                                     color={theme.text}
-                                    name='date-range'
+                                    name='today'
                                     type='materialicons'
                                     size={18}
                                 />
                                 <Text>{item.date}</Text>
+                            </View>
+                            <View style={styles.row}>
+                                <Icon
+                                    style={{ paddingRight: 5 }}
+                                    color={theme.text}
+                                    name='schedule'
+                                    type='materialicons'
+                                    size={18}
+                                />
+                                <Text>{item.open}</Text>
                             </View>
                             <View>
                                 {formatMenu({ menu: item.menu })}

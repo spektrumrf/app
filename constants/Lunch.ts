@@ -1,9 +1,9 @@
 
-const days = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag']
+const days = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön']
 
 const allergens = {
     'Sisältää Reilun kaupan tuotteita': 'innehåller fair trade varor',
-    'Vastuullisesti kasvatettua kalaa': 'hållbart fiske',
+    'Vastuullisesti kasvatettua kalaa': 'hållbart fiskad fisk',
     'Vastuullisesti kalastettua': 'hållbart fiske',
     'Sisältää luomua': 'innehåller ekologiskt',
     'seesaminsiemeniä': 'sesamfrön',
@@ -15,6 +15,7 @@ const allergens = {
     'valkosipulia': 'vitlök',
     'Pyydettäessä': 'be om',
     'pyydettäessä': 'be om',
+    'äyriäisiä': 'skaldjur',
     'gluteenia': 'gluten',
     'selleriä': 'selleri',
     'pähkinää': 'nötter',
