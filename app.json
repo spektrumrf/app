@@ -27,10 +27,15 @@
     "android": {
       "package": "fi.spektrum.app",
       "permissions": [],
-      "versionCode": 8, 
+      "versionCode": 8,
       "adaptiveIcon": {
         "backgroundColor": "#FF60A5",
         "foregroundImage": "./assets/launcher.png"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e976aa5f-86fc-42fe-9398-bc11bcdc1468"
       }
     }
   }

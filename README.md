@@ -26,16 +26,17 @@ Android application for the Spektrum student association with a couple of handy 
 
 #### Requirements
 
-Node 12
-
-```
-npm install -g expo-cli
-```
-
-#### Install dependencies
+Node 20
 
 ```
 npm i
+```
+
+#### Update Expo
+
+```
+npm install expo@46
+npx expo install --fix
 ```
 
 #### Run
@@ -44,11 +45,14 @@ npm i
 npm start
 ```
 
-#### Publish
+#### Build apk
+```
+npm install -g eas-cli
+eas login
+```
 
 ```
-npm run build:android
-npm run upload:android
+eas build -p android --profile preview
 ```
 
 ### Cloud Functions

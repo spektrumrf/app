@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Appearance } from 'react-native-appearance'
+import { Appearance } from 'react-native'
 
 import { retrieveData, storeData } from './useStorage'
 import { ThemeColors, DefaultTheme, DarkTheme, PinkTheme } from '../constants/Colors'
